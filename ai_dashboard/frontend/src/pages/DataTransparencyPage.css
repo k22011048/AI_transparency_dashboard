@@ -1,0 +1,38 @@
+/* DataTransparencyPage.css */
+.page-container {
+    padding: 20px;
+    background-color: #e6f7ff; /* Light blue background */
+}
+
+h2 {
+    color: #333;
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+ul {
+    list-style-type: square;
+    padding-left: 20px;
+}
+
+li {
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+}
+
+th {
+    background-color: #add8e6; /* Light blue */
+    font-weight: bold;
+}
