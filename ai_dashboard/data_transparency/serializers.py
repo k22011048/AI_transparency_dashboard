@@ -1,12 +1,17 @@
 from rest_framework import serializers
-from .models import PrivacyPolicy, DataFlow
+from .models import DataCollectionInfo, PolicySummary, ComparisonData
 
-class PrivacyPolicySerializer(serializers.ModelSerializer):
+class DataCollectionInfoSerializer(serializers.ModelSerializer):
     class Meta:
-        model = PrivacyPolicy
+        model = DataCollectionInfo
         fields = '__all__'
 
-class DataFlowSerializer(serializers.ModelSerializer):
+class PolicySummarySerializer(serializers.ModelSerializer):
     class Meta:
-        model = DataFlow
+        model = PolicySummary
+        fields = '__all__'
+
+class ComparisonDataSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ComparisonData
         fields = '__all__'

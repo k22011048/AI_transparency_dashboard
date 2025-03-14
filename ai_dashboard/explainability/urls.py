@@ -1,7 +1,12 @@
-from django.urls import path
-from .views import DecisionProcessList, BiasMetricList
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from .views import ModelExplainabilityViewSet, BiasDetectionViewSet, EducationalResourceViewSet
+
+router = DefaultRouter()
+router.register(r'model-explainability', ModelExplainabilityViewSet)
+router.register(r'bias-detection', BiasDetectionViewSet)
+router.register(r'educational-resources', EducationalResourceViewSet)
 
 urlpatterns = [
-    path('decision-processes/', DecisionProcessList.as_view(), name='decision-process-list'),
-    path('bias-metrics/', BiasMetricList.as_view(), name='bias-metric-list'),
+    path('', include(router.urls)),
 ]

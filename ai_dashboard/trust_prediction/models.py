@@ -1,9 +1,16 @@
 from django.db import models
 
-class TrustFactor(models.Model):
+class Criterion(models.Model):
     name = models.CharField(max_length=100)
-    weight = models.FloatField()
+    description = models.TextField()
 
-class PredefinedScenario(models.Model):
-    name = models.CharField(max_length=100)
-    parameters = models.JSONField()
+    def __str__(self):
+        return self.name
+
+class UserScore(models.Model):
+    criterion = models.ForeignKey(Criterion, on_delete=models.CASCADE)
+    score = models.IntegerField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.criterion.name} - {self.score}"

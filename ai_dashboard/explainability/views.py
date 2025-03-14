@@ -1,16 +1,15 @@
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from .models import DecisionProcess, BiasMetric
-from .serializers import DecisionProcessSerializer, BiasMetricSerializer
+from rest_framework import viewsets
+from .models import ModelExplainability, BiasDetection, EducationalResource
+from .serializers import ModelExplainabilitySerializer, BiasDetectionSerializer, EducationalResourceSerializer
 
-class DecisionProcessList(APIView):
-    def get(self, request):
-        processes = DecisionProcess.objects.all()
-        serializer = DecisionProcessSerializer(processes, many=True)
-        return Response(serializer.data)
+class ModelExplainabilityViewSet(viewsets.ModelViewSet):
+    queryset = ModelExplainability.objects.all()
+    serializer_class = ModelExplainabilitySerializer
 
-class BiasMetricList(APIView):
-    def get(self, request):
-        metrics = BiasMetric.objects.all()
-        serializer = BiasMetricSerializer(metrics, many=True)
-        return Response(serializer.data)
+class BiasDetectionViewSet(viewsets.ModelViewSet):
+    queryset = BiasDetection.objects.all()
+    serializer_class = BiasDetectionSerializer
+
+class EducationalResourceViewSet(viewsets.ModelViewSet):
+    queryset = EducationalResource.objects.all()
+    serializer_class = EducationalResourceSerializer

@@ -1,20 +1,43 @@
-/* ScenariosPage.css */
 .page-container {
-    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px;  /* Reduced padding */
+    gap: 10px;  /* Reduced gap */
+}
+
+.left-panel {
+    flex: 1;
+    padding: 10px;  /* Reduced padding */
+    max-width: 300px;
+    overflow: hidden;  /* Ensure no overflow on the left panel */
+}
+
+.right-panel {
+    flex: 2;
+    padding: 5px;  /* Reduced padding */
+    min-width: 400px;
 }
 
 h2 {
     color: #006400; /* Dark green */
-    margin-bottom: 15px;
+    margin-bottom: 10px;  /* Reduced margin */
 }
 
-ul {
-    list-style-type: square;
-    padding-left: 20px;
+.parameter-controls {
+    margin: 10px 0;  /* Reduced margin */
 }
 
-li {
-    margin-bottom: 10px;
+.parameter-controls div {
+    margin-bottom: 5px;  /* Reduced margin */
+}
+
+.parameter-controls label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.parameter-controls input {
+    width: 100%;
 }
 
 button {
@@ -29,4 +52,71 @@ button {
 
 button:hover {
     background-color: #32cd32; /* Lighter green */
+}
+
+.results-container {
+    display: flex;
+    gap: 5px;  /* Space between chart and explanation */
+    align-items: flex-start;  /* Align items at the top */
+}
+
+.chart-container {
+    width: 50%;  /* Half width for the chart */
+    height: 100px;  /* Adjusted height to fit the layout */
+    position: relative;
+}
+
+.chart-explanation {
+    width: 50%;  /* Half width for the explanation */
+    padding: 1px;  /* Add some padding */
+    box-sizing: border-box;  /* Ensure padding is included in the width */
+    height: 100px;  /* Same height as the chart */
+    overflow: hidden;  /* Hide overflow */
+}
+
+.chart-explanation h3 {
+    color: #006400; /* Dark green */
+}
+
+.chart-explanation p {
+    margin-bottom: 10px;  /* Reduced margin */
+}
+
+.chart-explanation ul {
+    list-style-type: disc;
+    margin-left: 20px;
+}
+
+.chart-explanation li {
+    margin-bottom: 5px;  /* Reduced margin */
+}
+
+/* Responsive adjustments */
+@media (min-width: 768px) {
+    .page-container {
+        flex-direction: row;
+    }
+
+    .left-panel {
+        flex: 1;
+    }
+
+    .right-panel {
+        flex: 3;
+    }
+
+    .results-container {
+        flex-direction: column;  /* Stack chart and explanation vertically on larger screens */
+    }
+
+    .chart-container {
+        width: 100%;  /* Full width on larger screens */
+        height: 350px;  /* Larger chart size for larger screens */
+    }
+
+    .chart-explanation {
+        width: 100%;  /* Full width on larger screens */
+        height: auto;  /* Adjust height */
+        max-height: none;  /* Remove height restriction for larger screens */
+    }
 }

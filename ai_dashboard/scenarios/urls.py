@@ -1,9 +1,11 @@
-from django.urls import path
-from .views import ScenarioList, ScenarioDetail, ScenarioCreate, ScenarioSimulation
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from .views import ScenarioViewSet, SimulationResultViewSet
+
+router = DefaultRouter()
+router.register(r'scenarios', ScenarioViewSet)
+router.register(r'simulation_results', SimulationResultViewSet)
 
 urlpatterns = [
-    path('scenarios/', ScenarioList.as_view(), name='scenario-list'),  # List all scenarios
-    path('scenarios/<int:pk>/', ScenarioDetail.as_view(), name='scenario-detail'),  # Scenario details
-    path('scenarios/create/', ScenarioCreate.as_view(), name='scenario-create'),  # Create new scenario
-    path('scenarios/simulate/', ScenarioSimulation.as_view(), name='scenario-simulate'),  # Simulate outcomes
+    path('', include(router.urls)),
 ]

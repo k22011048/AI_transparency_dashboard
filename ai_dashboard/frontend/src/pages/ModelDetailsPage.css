@@ -1,0 +1,85 @@
+.model-details-page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem;
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+}
+
+.heading {
+    color: #333;
+    text-align: center;
+    margin: 1rem 0;
+}
+
+.model-info {
+    background-color: white;
+    padding: 1rem;
+    margin: 1rem 0;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.model-architecture,
+.training-data,
+.trust-score-section,
+.regulatory-links {
+    margin: 1rem 0;
+    padding: 1rem;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+.trust-score-input {
+    width: 50px;
+    margin-left: 0.5rem;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.submit-button {
+    margin-left: 1rem;
+    padding: 0.5rem 1rem;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.submit-button:hover {
+    background-color: #0056b3;
+}
+
+.average-trust-score {
+    font-size: 1.5rem;
+    color: #007bff;
+    margin-top: 0.5rem;
+}
+
+.regulatory-links ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.regulatory-links li {
+    margin: 0.5rem 0;
+}
+
+.regulatory-links a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.regulatory-links a:hover {
+    text-decoration: underline;
+}

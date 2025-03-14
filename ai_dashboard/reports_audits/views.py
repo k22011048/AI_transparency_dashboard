@@ -1,22 +1,15 @@
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from .models import TransparencyReport, AuditLog, ComplianceStatus
-from .serializers import TransparencyReportSerializer, AuditLogSerializer, ComplianceStatusSerializer
+from rest_framework import viewsets
+from .models import TransparencyReport, RegulatoryComplianceLink, AuditLog
+from .serializers import TransparencyReportSerializer, RegulatoryComplianceLinkSerializer, AuditLogSerializer
 
-class TransparencyReportList(APIView):
-    def get(self, request):
-        reports = TransparencyReport.objects.all()
-        serializer = TransparencyReportSerializer(reports, many=True)
-        return Response(serializer.data)
+class TransparencyReportViewSet(viewsets.ModelViewSet):
+    queryset = TransparencyReport.objects.all()
+    serializer_class = TransparencyReportSerializer
 
-class AuditLogList(APIView):
-    def get(self, request):
-        logs = AuditLog.objects.all()
-        serializer = AuditLogSerializer(logs, many=True)
-        return Response(serializer.data)
+class RegulatoryComplianceLinkViewSet(viewsets.ModelViewSet):
+    queryset = RegulatoryComplianceLink.objects.all()
+    serializer_class = RegulatoryComplianceLinkSerializer
 
-class ComplianceStatusList(APIView):
-    def get(self, request):
-        statuses = ComplianceStatus.objects.all()
-        serializer = ComplianceStatusSerializer(statuses, many=True)
-        return Response(serializer.data)
+class AuditLogViewSet(viewsets.ModelViewSet):
+    queryset = AuditLog.objects.all()
+    serializer_class = AuditLogSerializer

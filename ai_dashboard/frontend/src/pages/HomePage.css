@@ -1,73 +1,131 @@
+/* Global Styling */
 body {
-    background-color: #79bdad;
+    background-color: #b0d5d9; /* Light teal */
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
+    color: #003333; /* Dark teal for text */
+    height: 100vh; /* Full viewport height */
+    overflow: hidden;
 }
 
+/* Page Layout */
 .page-container {
-    padding: 20px;
     display: flex;
-    flex-direction: row;
-    min-height: 100vh;
+    flex-direction: row; /* Left and right sections side by side */
+    height: 100vh; /* Full height of the viewport */
+    padding: 10px; /* Padding for better fit */
+    box-sizing: border-box; /* Ensure padding is included in the element's total width and height */
+    gap: 10px; /* Add gap between left and right sections */
+}
+
+.left-section {
+    width: 35%; /* Reduce width to 35% */
+    padding: 10px; /* Adjust padding for better fit */
+    border: 3px solid #337880; /* Slightly thicker teal border */
+    border-radius: 12px; /* Softer rounded edges */
+    background-color: #e0f7f9; /* Light teal background */
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15); /* Stronger shadow for depth */
+    color: #003333; /* Dark teal text */
+    height: 85vh; /* Shorten height */
+    box-sizing: border-box; /* Ensure padding and borders are included in the element's total width and height */
+    overflow-y: auto; /* Enable vertical scroll if content overflows */
+}
+
+.left-section h1 {
+    font-size: 1.8rem; /* Adjust heading size */
+    color: #002222; /* Slightly darker teal for contrast */
+    margin-bottom: 10px;
+}
+
+.left-section p {
+    font-size: 1.1rem; /* Adjust text size */
+    line-height: 1.4; /* Adjust line spacing */
+    margin-bottom: 10px;
+}
+
+/* Right Section: Introduction and Table */
+.right-section {
+    width: 65%; /* Reduce width to 65% */
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    box-sizing: border-box; /* Ensure padding and borders are included in the element's total width and height */
+}
+
+/* Container for table and introduction side by side */
+.intro-table-container {
+    display: flex;
+    flex-direction: row; /* Position introduction and table side by side */
+    gap: 10px; /* Add gap between introduction and table */
+    height: 100%; /* Full height */
 }
 
 .intro-section {
-    width: 33%;
-    padding: 20px;
-    text-align: left;
+    width: 50%; /* Half width for the introduction */
 }
 
 .table-section {
-    width: 67%;
-    padding: 20px;
-}
-
-h1 {
-    color: #006400; /* Dark green */
-    font-size: 2.5rem;
-    margin-bottom: 20px;
-}
-
-p {
-    color: #333;
-    line-height: 1.6;
-    margin-bottom: 15px;
+    width: 50%; /* Half width for the table section */
+    height: 100%; /* Adjust height */
+    padding: 10px; /* Reduced padding for a smaller container */
+    border: 3px solid #337880; /* Slightly thicker border */
+    border-radius: 12px; /* Rounded edges for consistency */
+    background-color: #e0f4f5; /* Light teal background */
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15); /* Stronger shadow */
+    overflow-y: auto; /* Enable vertical scroll if content overflows */
+    box-sizing: border-box; /* Ensure padding and borders are included in the element's total width and height */
+    margin-bottom: 0px; /* Remove margin between the two containers */
 }
 
 table {
-    width: 100%;
-    margin: 0;
+    width: 100%; /* Full width inside the table section */
     border-collapse: collapse;
-    background-color: white;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 10px;
 }
 
 th, td {
-    border: 1px solid #ddd;
-    padding: 12px;
+    border: 1px solid #337880; /* Teal borders for clarity */
+    padding: 10px; /* Adjust padding */
     text-align: left;
+    font-size: 1.1rem; /* Adjust text size */
+    color: #003333; /* Dark teal text for contrast */
 }
 
 th {
-    background-color: #f2f2f2;
+    background-color: #aedfe2; /* Medium teal for headers */
     font-weight: bold;
 }
 
 tr:nth-child(even) {
-    background-color: #f9f9f9;
+    background-color: #d7f1f3; /* Subtle alternating row colors */
 }
 
 tr:hover {
-    background-color: #dcdcdc;
+    background-color: #b0dede; /* Darker hover effect for interactivity */
+    transition: background-color 0.3s ease-in-out;
 }
 
+/* Responsive Design */
 @media (max-width: 768px) {
     .page-container {
-        flex-direction: column;
+        flex-direction: column; /* Stack sections vertically */
     }
-    
+
+    .left-section, .right-section {
+        width: 100%; /* Full width for smaller screens */
+    }
+
+    .intro-table-container {
+        flex-direction: column; /* Stack introduction and table vertically */
+    }
+
     .intro-section, .table-section {
-        width: 100%;
+        width: 100%; /* Full width for smaller screens */
     }
+}
+
+/* Additional styling for responsiveness */
+.table-section {
+    height: auto; /* Let the table section adjust height automatically */
+    max-height: 85vh; /* Ensure it doesn't exceed viewport height */
 }

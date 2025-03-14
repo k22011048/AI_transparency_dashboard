@@ -1,16 +1,18 @@
-from rest_framework.views import APIView
+from rest_framework import viewsets
 from rest_framework.response import Response
-from .models import TrustFactor, PredefinedScenario
-from .serializers import TrustFactorSerializer, PredefinedScenarioSerializer
+from .models import Criterion, UserScore
+from .serializers import CriterionSerializer, UserScoreSerializer
+from django.db.models import Avg
 
-class TrustFactorList(APIView):
-    def get(self, request):
-        factors = TrustFactor.objects.all()
-        serializer = TrustFactorSerializer(factors, many=True)
-        return Response(serializer.data)
+class CriterionViewSet(viewsets.ModelViewSet):
+    queryset = Criterion.objects.all()
+    serializer_class = CriterionSerializer
 
-class ScenarioList(APIView):
-    def get(self, request):
-        scenarios = PredefinedScenario.objects.all()
-        serializer = PredefinedScenarioSerializer(scenarios, many=True)
-        return Response(serializer.data)
+class UserScoreViewSet(viewsets.ModelViewSet):
+    queryset = UserScore.objects.all()
+    serializer_class = UserScoreSerializer
+
+class SavedScoresViewSet(viewsets.ViewSet):
+    def list(self, request):
+        scores = UserScore.objects.values('criterion__name').annotate(average_score=Avg('score'))
+        return Response(scores)

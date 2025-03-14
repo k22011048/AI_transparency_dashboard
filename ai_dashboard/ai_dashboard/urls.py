@@ -21,12 +21,13 @@ from . import views  # Import the root view
 urlpatterns = [
     path('', views.homepage, name='home'),  # Add this for the root URL
     path('home/', include('home.urls')),  # Include URLs for the "Home" app
+    path('details/', include('model_details.urls')),
     path('data-transparency/', include('data_transparency.urls')),
     path('trust-prediction/', include('trust_prediction.urls')),
     path('chatbot/', include('chatbot.urls')),
     path('reports-audits/', include('reports_audits.urls')),
     path('explainability/', include('explainability.urls')),
-    path('scenarios/', include('scenarios.urls')),
+    path('api/', include('scenarios.urls')),
     path('admin/', admin.site.urls),
 ]
 

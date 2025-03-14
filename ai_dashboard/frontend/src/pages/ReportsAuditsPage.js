@@ -1,64 +1,108 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import "./ReportsAuditsPage.css";
+import React, { useEffect, useState } from 'react';
+import Plotly from 'plotly.js-dist';
+import './ReportsAuditsPage.css';
 
 const ReportsAuditsPage = () => {
-    const [reports, setReports] = useState([]);
+    const [transparencyScores, setTransparencyScores] = useState([]);
+    const [regulatoryLinks, setRegulatoryLinks] = useState([]);
     const [auditLogs, setAuditLogs] = useState([]);
-    const [complianceStatuses, setComplianceStatuses] = useState([]);
 
     useEffect(() => {
-        axios.get("http://127.0.0.1:8000/reports-audits/reports/")
-            .then((response) => setReports(response.data))
-            .catch((error) => console.error("Error fetching transparency reports:", error));
+        const fetchScores = async () => {
+            try {
+                const response = await fetch('/api/transparency-reports/');
+                const text = await response.text();
+                try {
+                    const data = JSON.parse(text);
+                    setTransparencyScores(data);
 
-        axios.get("http://127.0.0.1:8000/reports-audits/logs/")
-            .then((response) => setAuditLogs(response.data))
-            .catch((error) => console.error("Error fetching audit logs:", error));
+                    const chartData = data.map(score => ({
+                        x: [score.month],
+                        y: [score.score],
+                        type: 'bar',
+                        name: 'Transparency Score'
+                    }));
 
-        axios.get("http://127.0.0.1:8000/reports-audits/compliance/")
-            .then((response) => setComplianceStatuses(response.data))
-            .catch((error) => console.error("Error fetching compliance statuses:", error));
+                    const layout = {
+                        title: 'Transparency Reports',
+                        xaxis: { title: 'Month' },
+                        yaxis: { title: 'Score' }
+                    };
+
+                    Plotly.newPlot('transparencyChart', chartData, layout);
+                } catch (error) {
+                    console.error('Error parsing transparency report JSON:', error);
+                    console.log('Response text:', text);
+                }
+            } catch (error) {
+                console.error('Error fetching transparency reports:', error);
+            }
+        };
+
+        const fetchLinks = async () => {
+            try {
+                const response = await fetch('/api/regulatory-compliance-links/');
+                const text = await response.text();
+                try {
+                    const data = JSON.parse(text);
+                    setRegulatoryLinks(data);
+                } catch (error) {
+                    console.error('Error parsing regulatory links JSON:', error);
+                    console.log('Response text:', text);
+                }
+            } catch (error) {
+                console.error('Error fetching regulatory compliance links:', error);
+            }
+        };
+
+        const fetchLogs = async () => {
+            try {
+                const response = await fetch('/api/audit-logs/');
+                const text = await response.text();
+                try {
+                    const data = JSON.parse(text);
+                    setAuditLogs(data);
+                } catch (error) {
+                    console.error('Error parsing audit logs JSON:', error);
+                    console.log('Response text:', text);
+                }
+            } catch (error) {
+                console.error('Error fetching audit logs:', error);
+            }
+        };
+
+        fetchScores();
+        fetchLinks();
+        fetchLogs();
     }, []);
 
     return (
-        <div>
-            <h1>Transparency Reports and Audits</h1>
-            <h2>Transparency Reports</h2>
-            <ul>
-                {reports.map((report) => (
-                    <li key={report.id}>
-                        {report.report_date}: Transparency Score {report.transparency_score}
-                    </li>
-                ))}
-            </ul>
-            <h2>Audit Logs</h2>
-            <ul>
-                {auditLogs.map((log) => (
-                    <li key={log.id}>
-                        {log.change_date}: {log.change_description}
-                    </li>
-                ))}
-            </ul>
-            <h2>Compliance Statuses</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Regulation</th>
-                        <th>Status</th>
-                        <th>Last Checked</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {complianceStatuses.map((status) => (
-                        <tr key={status.id}>
-                            <td>{status.regulation}</td>
-                            <td>{status.status}</td>
-                            <td>{status.last_checked}</td>
-                        </tr>
+        <div className="reports-audits-page">
+            <h1 className="heading">AI Transparency Reports & Audits Page</h1>
+            <div className="section">
+                <h2 className="heading">Transparency Reports</h2>
+                <div id="transparencyChart" className="chart"></div>
+            </div>
+            <div className="section">
+                <h2 className="heading">Regulatory Compliance Links</h2>
+                <ul className="resource-list">
+                    {regulatoryLinks.map(link => (
+                        <li key={link.id} className="resource-item">
+                            <a href={link.url} target="_blank" rel="noopener noreferrer">{link.name}</a>: {link.description}
+                        </li>
                     ))}
-                </tbody>
-            </table>
+                </ul>
+            </div>
+            <div className="section">
+                <h2 className="heading">Audit Logs</h2>
+                <ul className="audit-log-list">
+                    {auditLogs.map(log => (
+                        <li key={log.id} className="audit-log-item">
+                            <strong>{log.timestamp}:</strong> {log.event} - {log.details}
+                        </li>
+                    ))}
+                </ul>
+            </div>
         </div>
     );
 };

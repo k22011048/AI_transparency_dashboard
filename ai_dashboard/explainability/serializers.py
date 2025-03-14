@@ -1,12 +1,17 @@
 from rest_framework import serializers
-from .models import DecisionProcess, BiasMetric
+from .models import ModelExplainability, BiasDetection, EducationalResource
 
-class DecisionProcessSerializer(serializers.ModelSerializer):
+class ModelExplainabilitySerializer(serializers.ModelSerializer):
     class Meta:
-        model = DecisionProcess
+        model = ModelExplainability
         fields = '__all__'
 
-class BiasMetricSerializer(serializers.ModelSerializer):
+class BiasDetectionSerializer(serializers.ModelSerializer):
     class Meta:
-        model = BiasMetric
+        model = BiasDetection
+        fields = '__all__'
+
+class EducationalResourceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = EducationalResource
         fields = '__all__'

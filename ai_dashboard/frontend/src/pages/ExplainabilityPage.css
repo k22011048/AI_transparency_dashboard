@@ -1,36 +1,34 @@
-/* ExplainabilityPage.css */
-.page-container {
-    padding: 20px;
+.explainability-page {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #b0d5d9;
 }
 
-h2 {
-    color: #333;
-    margin-bottom: 15px;
+.explainability-heading,
+.section-heading {
+    color: #086d5c;
+    text-align: center;
+    margin-top: 10px;
 }
 
-ul {
-    list-style-type: circle;
-    padding-left: 20px;
-}
-
-li {
-    margin-bottom: 10px;
-    font-size: 1.1rem;
-}
-
-table {
-    width: 100%;
-    margin: 20px 0;
-    border-collapse: collapse;
-}
-
-th, td {
-    border: 1px solid #ccc;
+.section {
+    margin: 10px;
     padding: 10px;
-    text-align: left;
+
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-th {
-    background-color: #add8e6; /* Light blue */
-    font-weight: bold;
+.resource-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.resource-item {
+    background: #fafafa;
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 5px;
 }

@@ -1,28 +1,85 @@
+/* Navbar Container */
 .navbar {
-    background-color: #282c34;
-    padding: 10px;
-}
-
-.navbar ul {
-    list-style: none;
+    background-color: #035838; /* Dark green background */
+    padding: 15px 30px; /* Larger padding for a more spacious look */
     display: flex;
-    justify-content: space-around;
-    padding: 0;
-    margin: 0;
+    justify-content: space-between; /* Space between logo and navigation links */
+    align-items: center; /* Vertically center items */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    position: sticky; /* Stick to the top of the page */
+    top: 0;
+    z-index: 1000; /* Ensure it stays above other content */
 }
 
+/* Logo Styling */
+.logo img {
+    height: 60px; /* Increase logo size */
+    width: auto; /* Maintain aspect ratio */
+    cursor: pointer; /* Clickable logo */
+    margin-right: 20px; /* Add spacing between logo and navigation links */
+}
+
+/* Navbar List */
+.navbar ul {
+    list-style: none; /* Remove bullet points */
+    display: flex; /* Align links horizontally */
+    flex-grow: 1; /* Allow links to fill available space */
+    justify-content: space-around; /* Evenly distribute links */
+    align-items: center; /* Vertically align links in the middle */
+    margin: 0;
+    padding: 0;
+}
+
+/* Navbar Links */
 .navbar ul li {
-    display: inline;
+    display: flex;
+    justify-content: center; /* Horizontally center text inside the tab */
+    align-items: center; /* Vertically center text inside the tab */
+    height: 100%; /* Ensure the links maintain consistent height */
 }
 
 .navbar ul li a {
-    color: white;
-    text-decoration: none;
-    padding: 8px 16px;
-    border-radius: 4px;
-    transition: background-color 0.3s;
+    text-decoration: none; /* Remove underline */
+    color: white; /* White text for contrast */
+    font-size: 1.5rem; /* Slightly larger for visibility */
+    font-weight: bold;
+    padding: 10px 20px; /* Larger padding for consistent spacing */
+    border-radius: 8px; /* Rounded corners */
+    transition: background-color 0.3s ease-in-out; /* Smooth hover */
+    text-align: center; /* Center align text */
+    display: block; /* Ensure full clickable area */
 }
 
+/* Hover Effect for Links */
 .navbar ul li a:hover {
-    background-color: #61dafb;
+    background-color: #2b5c2b; /* Slightly lighter green hover effect */
+    color: #ffffff; /* Keep text white for readability */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column; /* Stack logo and links vertically */
+        padding: 10px; /* Adjust padding for smaller screens */
+    }
+
+    .navbar ul {
+        flex-direction: column; /* Stack links vertically */
+        width: 100%; /* Make links take up full width */
+        text-align: center; /* Center-align links */
+    }
+
+    .navbar ul li {
+        justify-content: center; /* Ensure text stays centered horizontally */
+        align-items: center; /* Ensure text stays centered vertically */
+    }
+
+    .navbar ul li a {
+        width: 100%; /* Make each link stretch full width */
+        text-align: center;
+    }
+
+    .logo img {
+        height: 50px; /* Slightly smaller logo for compact screens */
+    }
 }

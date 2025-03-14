@@ -1,7 +1,12 @@
-from django.urls import path
-from .views import TrustFactorList, ScenarioList
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from .views import CriterionViewSet, UserScoreViewSet, SavedScoresViewSet
+
+router = DefaultRouter()
+router.register(r'criteria', CriterionViewSet)
+router.register(r'user-scores', UserScoreViewSet)
+router.register(r'saved-scores', SavedScoresViewSet, basename='saved-scores')
 
 urlpatterns = [
-    path('factors/', TrustFactorList.as_view(), name='trust-factor-list'),
-    path('scenarios/', ScenarioList.as_view(), name='scenario-list'),
+    path('', include(router.urls)),
 ]

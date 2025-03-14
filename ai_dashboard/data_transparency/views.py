@@ -1,16 +1,15 @@
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from .models import PrivacyPolicy, DataFlow
-from .serializers import PrivacyPolicySerializer, DataFlowSerializer
+from rest_framework import viewsets
+from .models import DataCollectionInfo, PolicySummary, ComparisonData
+from .serializers import DataCollectionInfoSerializer, PolicySummarySerializer, ComparisonDataSerializer
 
-class PrivacyPolicyList(APIView):
-    def get(self, request):
-        policies = PrivacyPolicy.objects.all()
-        serializer = PrivacyPolicySerializer(policies, many=True)
-        return Response(serializer.data)
+class DataCollectionInfoViewSet(viewsets.ModelViewSet):
+    queryset = DataCollectionInfo.objects.all()
+    serializer_class = DataCollectionInfoSerializer
 
-class DataFlowList(APIView):
-    def get(self, request):
-        flows = DataFlow.objects.all()
-        serializer = DataFlowSerializer(flows, many=True)
-        return Response(serializer.data)
+class PolicySummaryViewSet(viewsets.ModelViewSet):
+    queryset = PolicySummary.objects.all()
+    serializer_class = PolicySummarySerializer
+
+class ComparisonDataViewSet(viewsets.ModelViewSet):
+    queryset = ComparisonData.objects.all()
+    serializer_class = ComparisonDataSerializer

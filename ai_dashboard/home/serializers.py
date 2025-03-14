@@ -5,3 +5,4 @@ class AIModelSerializer(serializers.ModelSerializer):
     class Meta:
         model = AIModel
         fields = '__all__'
+

@@ -1,8 +1,12 @@
-from django.urls import path
-from .views import TransparencyReportList, AuditLogList, ComplianceStatusList
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from .views import TransparencyReportViewSet, RegulatoryComplianceLinkViewSet, AuditLogViewSet
+
+router = DefaultRouter()
+router.register(r'transparency-reports', TransparencyReportViewSet)
+router.register(r'regulatory-compliance-links', RegulatoryComplianceLinkViewSet)
+router.register(r'audit-logs', AuditLogViewSet)
 
 urlpatterns = [
-    path('reports/', TransparencyReportList.as_view(), name='transparency-report-list'),
-    path('logs/', AuditLogList.as_view(), name='audit-log-list'),
-    path('compliance/', ComplianceStatusList.as_view(), name='compliance-status-list'),
+    path('', include(router.urls)),
 ]

@@ -1,10 +1,16 @@
 from django.db import models
 
-class DecisionProcess(models.Model):
-    ai_model = models.ForeignKey('home.AIModel', on_delete=models.CASCADE)
-    step_description = models.TextField()
+class ModelExplainability(models.Model):
+    title = models.CharField(max_length=100)
+    description = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
 
-class BiasMetric(models.Model):
-    ai_model = models.ForeignKey('home.AIModel', on_delete=models.CASCADE)
-    demographic = models.CharField(max_length=100)
-    bias_score = models.FloatField()
+class BiasDetection(models.Model):
+    title = models.CharField(max_length=100)
+    description = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+class EducationalResource(models.Model):
+    title = models.CharField(max_length=100)
+    description = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)

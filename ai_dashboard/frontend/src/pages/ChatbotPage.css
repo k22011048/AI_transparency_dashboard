@@ -1,39 +1,82 @@
-/* ChatbotPage.css */
-.page-container {
-    padding: 20px;
-    text-align: center;
+.chat-widget {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
 }
 
-textarea {
-    width: 80%;
-    height: 100px;
-    margin-bottom: 15px;
+.chat-button {
+    background-color: #006400; /* Dark green */
+    color: white;
+    border: none;
+    border-radius: 50%;
+    padding: 15px;
+    cursor: pointer;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.chat-button:hover {
+    background-color: #32cd32; /* Lighter green */
+}
+
+.chat-window {
+    width: 300px;
+    height: 400px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     padding: 10px;
-    font-size: 1.1rem;
-    border: 1px solid #ccc;
+}
+
+.chat-header {
+    background-color: #006400;
+    color: white;
+    padding: 10px;
+    border-radius: 10px 10px 0 0;
+    text-align: center;
+    font-size: 1.2rem;
+}
+
+.chat-body {
+    padding: 10px;
+    overflow-y: auto;
+}
+
+.response-box, .recommendation-box {
+    margin-top: 10px;
+    font-size: 1rem;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 10px;
     border-radius: 5px;
 }
 
+textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
 button {
-    padding: 10px 20px;
+    padding: 10px;
     background-color: #006400; /* Dark green */
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     font-size: 1rem;
+    margin-top: 10px;
 }
 
 button:hover {
     background-color: #32cd32; /* Lighter green */
-}
-
-.response-box {
-    margin-top: 20px;
-    font-size: 1.2rem;
-    color: #333;
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    padding: 15px;
-    border-radius: 5px;
 }

@@ -1,47 +1,78 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import "./ExplainabilityPage.css";
+import React, { useEffect, useState } from 'react';
+import Plotly from 'plotly.js-dist';
+import './ExplainabilityPage.css';
 
 const ExplainabilityPage = () => {
-    const [decisionProcesses, setDecisionProcesses] = useState([]);
-    const [biasMetrics, setBiasMetrics] = useState([]);
+    const [modelData, setModelData] = useState([]);
+    const [biasData, setBiasData] = useState([]);
+    const [resources, setResources] = useState([]);
 
     useEffect(() => {
-        axios.get("http://127.0.0.1:8000/explainability/decision-processes/")
-            .then((response) => setDecisionProcesses(response.data))
-            .catch((error) => console.error("Error fetching decision processes:", error));
+        const fetchData = async () => {
+            try {
+                const modelRes = await fetch('/api/model-explainability/');
+                const modelText = await modelRes.text();
+                try {
+                    const modelJson = JSON.parse(modelText);
+                    setModelData(modelJson);
+                } catch (e) {
+                    console.error('Error parsing model explainability JSON:', e);
+                    console.log('Response text:', modelText);
+                }
 
-        axios.get("http://127.0.0.1:8000/explainability/bias-metrics/")
-            .then((response) => setBiasMetrics(response.data))
-            .catch((error) => console.error("Error fetching bias metrics:", error));
+                const biasRes = await fetch('/api/bias-detection/');
+                const biasText = await biasRes.text();
+                try {
+                    const biasJson = JSON.parse(biasText);
+                    setBiasData(biasJson);
+                } catch (e) {
+                    console.error('Error parsing bias detection JSON:', e);
+                    console.log('Response text:', biasText);
+                }
+
+                const resourcesRes = await fetch('/api/educational-resources/');
+                const resourcesText = await resourcesRes.text();
+                try {
+                    const resourcesJson = JSON.parse(resourcesText);
+                    setResources(resourcesJson);
+                } catch (e) {
+                    console.error('Error parsing educational resources JSON:', e);
+                    console.log('Response text:', resourcesText);
+                }
+
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
+        fetchData();
+
+        const data = [{ x: [1, 2, 3, 4, 5], y: [10, 15, 13, 17, 10], type: 'scatter' }];
+        Plotly.newPlot('modelChart', data);
     }, []);
 
     return (
-        <div>
-            <h1>Explainability Insights</h1>
-            <h2>Decision Processes</h2>
-            <ul>
-                {decisionProcesses.map((process) => (
-                    <li key={process.id}>{process.step_description}</li>
+        <div className="explainability-page">
+            <h1 className="heading">AI Model Explainability Page</h1>
+            <div className="section">
+                <h2 className="heading">Model Explainability Visuals</h2>
+                <div id="modelChart" className="chart"></div>
+            </div>
+            <div className="section">
+                <h2 className="heading">Bias Detection Insights</h2>
+                {biasData.map((item) => (
+                    <p key={item.id}>{item.description}</p>
                 ))}
-            </ul>
-            <h2>Bias Metrics</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Demographic</th>
-                        <th>Bias Score</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {biasMetrics.map((metric) => (
-                        <tr key={metric.id}>
-                            <td>{metric.demographic}</td>
-                            <td>{metric.bias_score}</td>
-                        </tr>
+            </div>
+            <div className="section">
+                <h2 className="heading">Educational Resources</h2>
+                <ul className="resource-list">
+                    {resources.map((item) => (
+                        <li key={item.id} className="resource-item">
+                            <strong>{item.title}:</strong> {item.description}
+                        </li>
                     ))}
-                </tbody>
-            </table>
+                </ul>
+            </div>
         </div>
     );
 };

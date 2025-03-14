@@ -1,21 +1,36 @@
-from rest_framework.views import APIView
+from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .models import FAQ
-from .serializers import FAQSerializer
+from .models import Feedback, FAQ
+from .serializers import FeedbackSerializer, FAQSerializer
 
-class FAQList(APIView):
-    def get(self, request):
-        faqs = FAQ.objects.all()
-        serializer = FAQSerializer(faqs, many=True)
-        return Response(serializer.data)
+@api_view(['POST'])
+def chatbot_query(request):
+    query = request.data.get("query")
+    answer = process_query(query)
+    return Response({"answer": answer})
 
-class ChatbotQuery(APIView):
-    def post(self, request):
-        user_input = request.data.get("query", "").lower()
-        faqs = FAQ.objects.all()
+@api_view(['POST'])
+def chatbot_recommend(request):
+    query = request.data.get("query")
+    recommendation = generate_recommendation(query)
+    return Response({"recommendation": recommendation})
 
-        for faq in faqs:
-            if faq.question.lower() in user_input:
-                return Response({"answer": faq.answer})
+@api_view(['POST'])
+def chatbot_feedback(request):
+    serializer = FeedbackSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response({"status": "success"})
+    return Response(serializer.errors, status=400)
 
-        return Response({"answer": "I'm sorry, I don't have an answer for that yet."})
+@api_view(['GET'])
+def faq_list(request):
+    faqs = FAQ.objects.all()
+    serializer = FAQSerializer(faqs, many=True)
+    return Response(serializer.data)
+
+def process_query(query):
+    return "This is the response to your query."
+
+def generate_recommendation(query):
+    return "This is the recommendation based on your query."

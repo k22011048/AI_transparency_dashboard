@@ -1,12 +1,12 @@
 from rest_framework import serializers
-from .models import TrustFactor, PredefinedScenario
+from .models import Criterion, UserScore
 
-class TrustFactorSerializer(serializers.ModelSerializer):
+class CriterionSerializer(serializers.ModelSerializer):
     class Meta:
-        model = TrustFactor
+        model = Criterion
         fields = '__all__'
 
-class PredefinedScenarioSerializer(serializers.ModelSerializer):
+class UserScoreSerializer(serializers.ModelSerializer):
     class Meta:
-        model = PredefinedScenario
+        model = UserScore
         fields = '__all__'
