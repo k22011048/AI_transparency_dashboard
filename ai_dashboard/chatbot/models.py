@@ -27,3 +27,11 @@ class Feedback(models.Model):
 
     def __str__(self):
         return self.feedback[:50]
+        
+class Question(models.Model):
+    area = models.ForeignKey(Area, related_name="questions", on_delete=models.CASCADE)
+    question_text = models.TextField()
+    answer_text = models.TextField(null=True, blank=True)  # New field for answers
+
+    def __str__(self):
+        return self.question_text

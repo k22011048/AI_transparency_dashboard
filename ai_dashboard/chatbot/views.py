@@ -1,6 +1,6 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .models import Area, QuestionAnswerLog
+from .models import Area, Question, QuestionAnswerLog
 
 @api_view(['GET'])
 def areas_with_questions(request):
@@ -12,18 +12,18 @@ def areas_with_questions(request):
 @api_view(['POST'])
 def chatbot_query(request):
     question_text = request.data.get("query")
+    try:
+        # Fetch the question from the database
+        question = Question.objects.get(question_text=question_text)
+        answer_text = question.answer_text or "No answer provided for this question yet."
+    except Question.DoesNotExist:
+        answer_text = "Sorry, I couldn't find an answer to your question."
 
-    # Generate the response for the question
-    # You can replace this with more sophisticated logic (e.g., AI model or database lookup)
-    answer_text = f"Response for: {question_text}"
-
-    # Log the question and its answer to the database
+    # Log the question and answer
     QuestionAnswerLog.objects.create(
         question_text=question_text,
         answer_text=answer_text
     )
-
-    # Return the answer to the frontend
     return Response({"answer": answer_text})
 
 @api_view(['POST'])

@@ -31,10 +31,13 @@ const ChatbotPage = () => {
     const handleQuestionSelect = async (question) => {
         setSelectedQuestion(question);
         try {
-            const res = await axios.post("http://localhost:8000/chatbot/query/", { query: question.question_text });
-            setResponse(res.data.answer);
+            const res = await axios.post("http://localhost:8000/chatbot/query/", {
+                query: question.question_text,
+            });
+            setResponse(res.data.answer); // Display the backend answer in the UI
         } catch (error) {
             console.error("Error interacting with chatbot:", error);
+            setResponse("Sorry, something went wrong. Please try again later."); // Handle errors gracefully
         }
     };
 
@@ -95,7 +98,9 @@ const ChatbotPage = () => {
                                 </div>
                             ) : (
                                 <div>
-                                    <h3>Response</h3>
+                                    <h3>Question</h3>
+                                    <p>{selectedQuestion.question_text}</p>
+                                    <h3>Answer</h3>
                                     <p>{response}</p>
                                     <div className="feedback-section">
                                         <textarea
@@ -104,7 +109,9 @@ const ChatbotPage = () => {
                                             placeholder="What do you think about the response?"
                                             rows="4"
                                         />
-                                        <button onClick={handleFeedbackSubmit}>Submit Feedback</button>
+                                        <button onClick={handleFeedbackSubmit} disabled={!feedback.trim()}>
+                                            Submit Feedback
+                                        </button>
                                     </div>
                                     <button onClick={() => setSelectedQuestion(null)} className="back-button">
                                         Back to Questions

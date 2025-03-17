@@ -28,13 +28,14 @@ const HomePage = () => {
             <div className="left-section">
                 <h1>AI Transparency Dashboard</h1>
                 <p>
-                    Imagine artificial intelligence as a powerful assistant, helping to make important decisions in areas like hiring, healthcare, and law enforcement. But for us to trust these decisions, we need to understand how they are made. This is where AI transparency comes in—it's like switching on a light to see inside a mysterious machine.
+                Artificial intelligence is a powerful tool that influences decisions in critical areas such as hiring, healthcare, and law enforcement. However, for AI to be trusted, it is essential to understand how it reaches its conclusions. This is where AI transparency becomes crucial, as it allows people to see how an AI system operates rather than treating it as a "black box." Without transparency, AI systems can make decisions that seem biased or unfair, sometimes with serious consequences. Understanding how AI works helps prevent unintended harm and ensures that these systems remain ethical, accountable, and beneficial for society.
+                </p>
+                <h1>AI Controversies</h1>
+                <p>
+                A lack of transparency in AI has led to several controversies, highlighting the risks of hidden decision-making. In 2018, Amazon scrapped its AI hiring tool after discovering it favoured male candidates, reflecting biases in its training data. Similarly, the COMPAS system, used in US courts since 2016, was found to disproportionately classify Black defendants as high-risk, raising concerns about fairness in criminal justice.
                 </p>
                 <p>
-                    Without transparency, AI systems can make decisions that seem unfair or biased. For example, Amazon once had to stop using an AI hiring tool because it favoured male candidates over female ones. In another case, the Chicago Police Department used an AI system to predict where crimes might happen, but it unfairly targeted certain communities. These problems happened because people couldn't see how the AI made its decisions.
-                </p>
-                <p>
-                    When AI systems are open and clear, we can spot and fix issues before they cause harm. Research shows that 78% of people are worried about the lack of transparency in AI, which highlights the need for AI to be easy to understand. Transparent AI isn't just a nice feature—it's essential for building trust and making sure AI is fair and beneficial for everyone. Let's work towards a future where AI helps everyone equally and ethically.
+                Predictive policing also faced scrutiny in 2020 when the Chicago Police Department’s AI system disproportionately targeted low-income and minority areas, reinforcing over-policing. In financial services, Apple’s AI-powered credit card was criticised in 2019 for assigning lower credit limits to women, despite similar financial profiles to men. More recently, in 2023, OpenAI’s GPT-4 was accused of generating misinformation and biased content, with critics calling for greater transparency in large language models.
                 </p>
                 <h1>How We Calculated These Values</h1>
                 <p>

@@ -3,8 +3,8 @@ from rest_framework.routers import DefaultRouter
 from .views import AIModelViewSet
 
 router = DefaultRouter()
-router.register(r'models', AIModelViewSet)
+router.register(r'ai-models', AIModelViewSet)
 
 urlpatterns = [
-    path('details', include(router.urls)),
+    path('api/', include(router.urls)),
 ]

@@ -7,7 +7,8 @@ class AreaAdmin(admin.ModelAdmin):
 
 @admin.register(Question)
 class QuestionAdmin(admin.ModelAdmin):
-    list_display = ['area', 'question_text']
+    list_display = ['area', 'question_text', 'answer_text']  # Add 'answer_text'
+
 
 @admin.register(QuestionAnswerLog)
 class QuestionAnswerLogAdmin(admin.ModelAdmin):
@@ -20,3 +21,4 @@ class FeedbackAdmin(admin.ModelAdmin):
     list_display = ['feedback', 'created_at']
     search_fields = ['feedback']
     list_filter = ['created_at']
+

@@ -23,3 +23,8 @@ class QuestionAnswerLogSerializer(serializers.ModelSerializer):
     class Meta:
         model = QuestionAnswerLog
         fields = ['id', 'question_text', 'answer_text', 'created_at']
+
+class QuestionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Question
+        fields = ['id', 'question_text', 'answer_text']  
