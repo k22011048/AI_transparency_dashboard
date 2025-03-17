@@ -1,131 +1,84 @@
-/* Global Styling */
-body {
-    background-color: #b0d5d9; /* Light teal */
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    color: #003333; /* Dark teal for text */
-    height: 100vh; /* Full viewport height */
-    overflow: hidden;
-}
 
 /* Page Layout */
 .page-container {
     display: flex;
-    flex-direction: row; /* Left and right sections side by side */
-    height: 100vh; /* Full height of the viewport */
-    padding: 10px; /* Padding for better fit */
-    box-sizing: border-box; /* Ensure padding is included in the element's total width and height */
-    gap: 10px; /* Add gap between left and right sections */
+    flex-direction: row; /* Force left and right sections side by side */
+    width: 100vw; /* Full width */
+    height: 100vh; /* Full viewport height */
+    padding: 20px; /* Adjust spacing */
+    box-sizing: border-box;
+    gap: 20px; /* Space between sections */
+    justify-content: space-between; /* Distribute space */
 }
 
+/* Left Section */
 .left-section {
-    width: 35%; /* Reduce width to 35% */
-    padding: 10px; /* Adjust padding for better fit */
-    border: 3px solid #337880; /* Slightly thicker teal border */
-    border-radius: 12px; /* Softer rounded edges */
-    background-color: #e0f7f9; /* Light teal background */
-    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15); /* Stronger shadow for depth */
-    color: #003333; /* Dark teal text */
-    height: 85vh; /* Shorten height */
-    box-sizing: border-box; /* Ensure padding and borders are included in the element's total width and height */
-    overflow-y: auto; /* Enable vertical scroll if content overflows */
+    flex: 1; /* Let it take 1 part of the space */
+    padding: 15px;
+    border: 3px solid #337880;
+    border-radius: 12px;
+    background-color: #e0f7f9;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
+    color: #003333;
+    overflow-y: auto;
+    height: auto; /* Adjust height dynamically */
 }
 
-.left-section h1 {
-    font-size: 1.8rem; /* Adjust heading size */
-    color: #002222; /* Slightly darker teal for contrast */
-    margin-bottom: 10px;
-}
-
-.left-section p {
-    font-size: 1.1rem; /* Adjust text size */
-    line-height: 1.4; /* Adjust line spacing */
-    margin-bottom: 10px;
-}
-
-/* Right Section: Introduction and Table */
+/* Right Section */
 .right-section {
-    width: 65%; /* Reduce width to 65% */
+    flex: 1; /* Let it take 1 part of the space */
     display: flex;
-    flex-direction: column; /* Stack elements vertically */
-    box-sizing: border-box; /* Ensure padding and borders are included in the element's total width and height */
+    flex-direction: column;
+    height: auto;
+    box-sizing: border-box;
 }
 
-/* Container for table and introduction side by side */
-.intro-table-container {
-    display: flex;
-    flex-direction: row; /* Position introduction and table side by side */
-    gap: 10px; /* Add gap between introduction and table */
-    height: 100%; /* Full height */
-}
-
-.intro-section {
-    width: 50%; /* Half width for the introduction */
-}
-
+/* Table Section */
 .table-section {
-    width: 50%; /* Half width for the table section */
-    height: 100%; /* Adjust height */
-    padding: 10px; /* Reduced padding for a smaller container */
-    border: 3px solid #337880; /* Slightly thicker border */
-    border-radius: 12px; /* Rounded edges for consistency */
-    background-color: #e0f4f5; /* Light teal background */
-    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15); /* Stronger shadow */
-    overflow-y: auto; /* Enable vertical scroll if content overflows */
-    box-sizing: border-box; /* Ensure padding and borders are included in the element's total width and height */
-    margin-bottom: 0px; /* Remove margin between the two containers */
+    flex-grow: 1;
+    padding: 15px;
+    border: 3px solid #337880;
+    border-radius: 12px;
+    background-color: #e0f4f5;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
+    overflow-y: auto;
 }
 
+/* Table Styling */
 table {
-    width: 100%; /* Full width inside the table section */
+    width: 100%;
     border-collapse: collapse;
-    margin-top: 10px;
 }
 
 th, td {
-    border: 1px solid #337880; /* Teal borders for clarity */
-    padding: 10px; /* Adjust padding */
+    border: 1px solid #337880;
+    padding: 10px;
     text-align: left;
-    font-size: 1.1rem; /* Adjust text size */
-    color: #003333; /* Dark teal text for contrast */
+    font-size: 1.1rem;
+    color: #003333;
 }
 
 th {
-    background-color: #aedfe2; /* Medium teal for headers */
+    background-color: #aedfe2;
     font-weight: bold;
 }
 
 tr:nth-child(even) {
-    background-color: #d7f1f3; /* Subtle alternating row colors */
+    background-color: #d7f1f3;
 }
 
 tr:hover {
-    background-color: #b0dede; /* Darker hover effect for interactivity */
+    background-color: #b0dede;
     transition: background-color 0.3s ease-in-out;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
     .page-container {
-        flex-direction: column; /* Stack sections vertically */
+        flex-direction: column; /* Stack sections vertically on small screens */
     }
 
     .left-section, .right-section {
-        width: 100%; /* Full width for smaller screens */
+        width: 100%;
     }
-
-    .intro-table-container {
-        flex-direction: column; /* Stack introduction and table vertically */
-    }
-
-    .intro-section, .table-section {
-        width: 100%; /* Full width for smaller screens */
-    }
-}
-
-/* Additional styling for responsiveness */
-.table-section {
-    height: auto; /* Let the table section adjust height automatically */
-    max-height: 85vh; /* Ensure it doesn't exceed viewport height */
 }
