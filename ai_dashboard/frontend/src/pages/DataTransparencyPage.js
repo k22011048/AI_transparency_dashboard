@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import Plotly from 'plotly.js-dist';
 import './DataTransparencyPage.css';
 
 const DataTransparencyPage = () => {
@@ -67,18 +66,6 @@ const DataTransparencyPage = () => {
     return (
         <div className="data-transparency-page">
             <h1 className="heading">AI Model Data Transparency Page</h1>
-
-            <section className="data-collection-section">
-                <h2>Detailed Data Collection Overview</h2>
-                {dataCollectionInfo.map(info => (
-                    <div key={info.id} className="data-collection-card">
-                        <h3>{info.modelName}</h3>
-                        <p><strong>Types of Data Collected:</strong> {info.dataTypes}</p>
-                        <p><strong>How Data is Collected:</strong> {info.collectionMethods}</p>
-                        <p><strong>How Data is Used:</strong> {info.usage}</p>
-                    </div>
-                ))}
-            </section>
 
             <section className="policy-summary-section">
                 <h2>AI Policy Summarization</h2>

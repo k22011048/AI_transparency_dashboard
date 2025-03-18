@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faComments } from "@fortawesome/free-solid-svg-icons";
 import "./ChatbotPage.css";
 
 const ChatbotPage = () => {
@@ -56,7 +58,7 @@ const ChatbotPage = () => {
     return (
         <div className="chatbot-container">
             <button className="chat-toggle" onClick={() => setIsOpen(!isOpen)}>
-                {isOpen ? "Close Chat" : "Chat with Clarity AI"}
+                <FontAwesomeIcon icon={faComments} />
             </button>
 
             {isOpen && (

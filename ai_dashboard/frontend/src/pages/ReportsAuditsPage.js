@@ -3,7 +3,7 @@ import Plotly from 'plotly.js-dist';
 import './ReportsAuditsPage.css';
 
 const ReportsAuditsPage = () => {
-    const [transparencyScores, setTransparencyScores] = useState([]);
+    const [setTransparencyScores] = useState([]);
     const [auditLogs, setAuditLogs] = useState([]);
 
     // Static data for regulatory compliance links and explanations
