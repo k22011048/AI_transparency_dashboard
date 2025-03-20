@@ -23,11 +23,12 @@ urlpatterns = [
     path('home/', include('home.urls')),  # Include URLs for the "Home" app
     path('details/', include('model_details.urls')),
     path('data-transparency/', include('data_transparency.urls')),
-    path('trust-prediction/', include('trust_prediction.urls')),
+    path('ai-recommendation/', include('ai_recommendation.urls')),
     path('chatbot/', include('chatbot.urls')),
     path('reports-audits/', include('reports_audits.urls')),
     path('explainability/', include('explainability.urls')),
     path('api/', include('scenarios.urls')),
+      path('api/features/', include('ai_recommendation.urls')),
     path('admin/', admin.site.urls),
 ]
 

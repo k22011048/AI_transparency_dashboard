@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar"; // Import the Navbar
 import HomePage from "./pages/HomePage";
 import DataTransparencyPage from "./pages/DataTransparencyPage";
-import TrustPredictionPage from "./pages/TrustPredictionPage";
+import AIRecommendationPage from "./pages/AIRecommendationPage";
 import ChatbotPage from "./pages/ChatbotPage";
 import ReportsAuditsPage from "./pages/ReportsAuditsPage";
 import ExplainabilityPage from "./pages/ExplainabilityPage";
@@ -18,7 +18,7 @@ function App() {
                 <Route path="/" element={<HomePage />} />
                 <Route path="/model-details" element={<ModelDetailsPage />} />
                 <Route path="/data-transparency" element={<DataTransparencyPage />} />
-                <Route path="/trust-prediction" element={<TrustPredictionPage />} />
+                <Route path="/ai-recommendation" element={<AIRecommendationPage />} />
                 <Route path="/reports-audits" element={<ReportsAuditsPage />} />
                 <Route path="/explainability" element={<ExplainabilityPage />} />
                 <Route path="/scenarios" element={<ScenariosPage />} />

@@ -17,7 +17,7 @@ const Navbar = () => {
                 <li><Link to="/">Home</Link></li>
                 <li><Link to= "/model-details">Model Details</Link></li>
                 <li><Link to="/data-transparency">Data Transparency</Link></li>
-                <li><Link to="/trust-prediction">AI Recommendation</Link></li>
+                <li><Link to="/ai-recommendation">AI Recommendation</Link></li>
                 <li><Link to="/reports-audits">Reports & Audits</Link></li>
                 <li><Link to="/explainability">Explainability</Link></li>
                 <li><Link to="/scenarios">What-If Scenarios</Link></li>

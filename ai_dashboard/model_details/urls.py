@@ -5,6 +5,4 @@ from .views import AIModelViewSet
 router = DefaultRouter()
 router.register(r'ai-models', AIModelViewSet)
 
-urlpatterns = [
-    path('api/', include(router.urls)),
-]
+urlpatterns = router.urls

@@ -1,6 +1,5 @@
 from django.apps import AppConfig
 
-
-class TrustPredictionConfig(AppConfig):
+class AiRecommendationConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'trust_prediction'
+    name = 'ai_recommendation'

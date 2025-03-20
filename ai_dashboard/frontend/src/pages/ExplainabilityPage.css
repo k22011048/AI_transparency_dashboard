@@ -1,24 +1,58 @@
 .explainability-page {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #b0d5d9;
+    display: flex;
+    flex-direction: column;
+    /* Stack sections vertically */
+    align-items: center;
+    /* Center horizontally */
+    justify-content: center;
+    /* Center vertically */
+    min-height: 100vh;
+    /* Make the page take up the full height of the viewport */
+    background-color: #bed8d7;
+    /* Teal background */
+    color: #004d40;
+    /* Dark green text */
+    padding: 20px;
+    box-sizing: border-box;
 }
 
-.explainability-heading,
-.section-heading {
-    color: #086d5c;
+.heading {
     text-align: center;
-    margin-top: 10px;
+    color: #00695c;
+    margin-bottom: 40px;
+    /* Space below the title */
+    font-size: 2.5rem;
 }
 
 .section {
-    margin: 10px;
-    padding: 10px;
-
-    background-color: white;
+    width: 100%;
+    /* Ensure sections span the full width */
+    max-width: 800px;
+    /* Restrict the maximum width for large screens */
+    padding: 20px;
+    background-color: #d7f5f4;
     border-radius: 10px;
+    outline: 2px solid #004d40;
+    /* Dark green border */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    /* Space between sections */
+}
+
+/* Added explicit styles for .educational-resources */
+.educational-resources {
+    width: 100%;
+    max-width: 800px;
+    /* Restrict the width for consistency */
+    padding: 20px;
+    background-color: #cdeeed;
+    /* Light teal box */
+    border-radius: 10px;
+    outline: 2px solid #004d40;
+    /* Dark green border to match other sections */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    /* Adds space below the educational resources */
 }
 
 .resource-list {
@@ -27,8 +61,60 @@
 }
 
 .resource-item {
-    background: #fafafa;
-    margin: 5px 0;
+    background-color: #bde3e3;
     padding: 10px;
+    margin-bottom: 10px;
     border-radius: 5px;
+    outline: 1px solid #004d40;
+    /* Matches dark green outline theme */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.resource-item:hover {
+    background-color: #a8dcdc;
+    /* Slightly darker teal when hovered */
+}
+
+.details {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #004d40;
+}
+
+.flowchart {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.mermaid {
+    background-color: #d7f5f4;
+    border: 2px solid #004d40;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.description-box {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #cdeeed;
+    border: 2px solid #004d40;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    color: #004d40;
+    font-family: Arial, sans-serif;
+}
+
+.description-box h3 {
+    margin-top: 0;
+    font-size: 18px;
+    color: #00695c;
+}
+
+.description-box p {
+    margin: 0;
+    font-size: 16px;
 }

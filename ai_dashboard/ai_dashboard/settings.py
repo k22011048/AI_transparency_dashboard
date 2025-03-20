@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'corsheaders',                  # For frontend-backend communication
     'home',
     'data_transparency',
-    'trust_prediction',
+    'ai_recommendation',
     'chatbot',
     'reports_audits',
     'explainability',
