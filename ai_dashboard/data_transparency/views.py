@@ -1,15 +1,18 @@
 from rest_framework import viewsets
-from .models import DataCollectionInfo, PolicySummary, ComparisonData
-from .serializers import DataCollectionInfoSerializer, PolicySummarySerializer, ComparisonDataSerializer
+from .models import PolicySummary, ComparisonData, ChartData
+from .serializers import PolicySummarySerializer, ComparisonDataSerializer, ChartDataSerializer
 
-class DataCollectionInfoViewSet(viewsets.ModelViewSet):
-    queryset = DataCollectionInfo.objects.all()
-    serializer_class = DataCollectionInfoSerializer
 
 class PolicySummaryViewSet(viewsets.ModelViewSet):
     queryset = PolicySummary.objects.all()
     serializer_class = PolicySummarySerializer
 
+
 class ComparisonDataViewSet(viewsets.ModelViewSet):
     queryset = ComparisonData.objects.all()
     serializer_class = ComparisonDataSerializer
+
+
+class ChartDataViewSet(viewsets.ModelViewSet):
+    queryset = ChartData.objects.all()
+    serializer_class = ChartDataSerializer

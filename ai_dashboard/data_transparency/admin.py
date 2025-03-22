@@ -1,9 +1,5 @@
 from django.contrib import admin
-from .models import DataCollectionInfo, PolicySummary, ComparisonData
-
-@admin.register(DataCollectionInfo)
-class DataCollectionInfoAdmin(admin.ModelAdmin):
-    list_display = ('modelName', 'dataTypes', 'collectionMethods', 'usage')
+from .models import PolicySummary, ComparisonData
 
 @admin.register(PolicySummary)
 class PolicySummaryAdmin(admin.ModelAdmin):

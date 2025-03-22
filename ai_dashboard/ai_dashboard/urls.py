@@ -28,7 +28,9 @@ urlpatterns = [
     path('reports-audits/', include('reports_audits.urls')),
     path('explainability/', include('explainability.urls')),
     path('api/', include('scenarios.urls')),
-      path('api/features/', include('ai_recommendation.urls')),
+    path('api/data-transparency/', include('data_transparency.urls')),
+    path('api/features/', include('ai_recommendation.urls')),
+    path('api/ai-models/', include('model_details.urls')),
     path('admin/', admin.site.urls),
 ]
 

@@ -1,5 +1,3 @@
-
-
 .data-transparency-page {
     max-width: 1200px;
     margin: 0 auto;
@@ -7,25 +5,37 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    font-family: Arial, sans-serif;
 }
 
 .heading {
     color: #333;
     text-align: center;
-    margin: 1rem 0;
+    margin: 1.5rem 0;
 }
 
-.data-collection-section, .policy-summary-section, .comparison-table-section, .privacy-impact-section {
+.policy-summary-section,
+.comparison-table-section,
+.privacy-impact-section {
     width: 100%;
-    margin: 1rem 0;
+    margin: 1.5rem 0;
+    padding: 1rem;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.data-collection-card, .policy-summary-card {
+.policy-summary-card {
     background-color: white;
     padding: 1rem;
     margin: 0.5rem 0;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.policy-summary-card h3 {
+    margin: 0;
+    color: #333;
 }
 
 .comparison-table {
@@ -34,7 +44,8 @@
     margin: 1rem 0;
 }
 
-.comparison-table th, .comparison-table td {
+.comparison-table th,
+.comparison-table td {
     border: 1px solid #ddd;
     padding: 0.5rem;
     text-align: left;
@@ -42,6 +53,7 @@
 
 .comparison-table th {
     background-color: #f2f2f2;
+    color: #333;
 }
 
 .chart {

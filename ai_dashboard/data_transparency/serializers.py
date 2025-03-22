@@ -1,10 +1,5 @@
 from rest_framework import serializers
-from .models import DataCollectionInfo, PolicySummary, ComparisonData
-
-class DataCollectionInfoSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = DataCollectionInfo
-        fields = '__all__'
+from .models import  PolicySummary, ComparisonData, ChartData
 
 class PolicySummarySerializer(serializers.ModelSerializer):
     class Meta:
@@ -14,4 +9,9 @@ class PolicySummarySerializer(serializers.ModelSerializer):
 class ComparisonDataSerializer(serializers.ModelSerializer):
     class Meta:
         model = ComparisonData
+        fields = '__all__'
+
+class ChartDataSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ChartData
         fields = '__all__'

@@ -118,3 +118,72 @@
     margin: 0;
     font-size: 16px;
 }
+
+@media (max-width: 600px) {
+    .heading {
+        font-size: 2rem; /* Smaller font size for headings */
+    }
+    .section, .educational-resources {
+        padding: 15px; /* Adjust padding */
+    }
+    .description-box h3 {
+        font-size: 16px; /* Smaller font size for subheadings */
+    }
+}
+
+  
+
+  
+
+  
+  .description-box {
+    margin-top: 20px;
+  }
+  
+  .description-box h3 {
+    margin-bottom: 10px;
+  }
+  
+  .description-box ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .description-box li {
+    margin-bottom: 10px;
+  }
+  
+  /* Flowchart styling */
+.flowchart-image {
+    width: 100%; /* Responsive scaling */
+    max-width: 1200px; /* Larger maximum width for readability */
+    height: auto;
+    display: block;
+    margin: auto;
+  }
+  
+  /* Overlay styling */
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .overlay-content {
+    text-align: center;
+  }
+  
+  .expanded-image {
+    max-width: 95%; /* Enlarged image occupies most of the viewport */
+    max-height: 90%; /* Proper height scaling */
+    display: block;
+    margin: auto;
+  }
+  

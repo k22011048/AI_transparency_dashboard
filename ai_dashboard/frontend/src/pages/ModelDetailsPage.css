@@ -1,40 +1,100 @@
-.model-details-page {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 1rem;
+/* Page Layout */
+.ai-models-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
     font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
+    color: #337880;
+    background-color: #96d1cc; /* Light blue background for visual appeal */
+    height: 100vh;
 }
 
-.heading {
-    color: #333;
-    text-align: center;
-    margin: 1rem 0;
-}
-
-ul {
+/* Tabs Section */
+.tabs {
+    display: flex;
+    justify-content: center;
     list-style-type: none;
     padding: 0;
+    margin: 20px 0;
+    border-bottom: 3px solid #337880;
+    width: 80%; /* Takes a significant proportion of the page */
 }
 
-li {
-    background-color: white;
-    margin: 0.5rem 0;
-    padding: 0.5rem;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+.tabs li {
+    flex: 1; /* Distribute tabs evenly */
+    text-align: center;
+    padding: 15px 20px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    border: 2px solid transparent;
+    background-color: #e0f7f9;
+    color: #337880;
+    transition: all 0.3s ease-in-out;
+    border-radius: 12px 12px 0 0;
 }
 
-li:hover {
-    background-color: #f0f0f0;
+.tabs li:hover {
+    background-color: #b0dede;
+    color: #003333;
 }
 
-.model-info {
-    background-color: white;
-    padding: 1rem;
-    margin: 1rem 0;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+.tabs li.active {
+    background-color: #337880;
+    color: white;
+    border-color: #337880;
+    font-weight: bold;
+}
+
+/* Model Details Section */
+.model-details {
+    width: 80%; /* Takes significant space on the page */
+    padding: 20px;
+    margin-top: 20px;
+    background-color: #e0f4f5;
+    border: 3px solid #337880;
+    border-radius: 12px;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
+    overflow-y: auto;
+}
+
+.model-details h3 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #337880;
+}
+
+.model-details p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin: 10px 0;
+}
+
+.architecture-diagram {
+    display: block;
+    width: 80%;
+    height: auto;
+    margin: 20px auto;
+    border: 2px solid #337880;
+    border-radius: 12px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .tabs {
+        flex-direction: column; /* Stack tabs vertically on small screens */
+    }
+
+    .tabs li {
+        margin-bottom: 10px;
+    }
+
+    .model-details {
+        width: 90%;
+    }
+
+    .architecture-diagram {
+        width: 100%;
+    }
 }

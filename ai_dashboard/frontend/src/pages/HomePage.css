@@ -72,6 +72,52 @@ tr:hover {
     transition: background-color 0.3s ease-in-out;
 }
 
+/* Input Field for Ratings */
+.rating-input {
+    width: 80px; /* Increase width */
+    height: 40px; /* Increase height */
+    font-size: 1.2rem; /* Match the text size to the table content */
+    border: 2px solid #337880; /* Use the same border style as the table */
+    border-radius: 8px; /* Rounded corners to match design */
+    background-color: #e0f7f9; /* Background color consistent with page */
+    color: #003333; /* Text color consistent with the page theme */
+    text-align: center; /* Align the text in the center */
+    margin-right: 5px; /* Add spacing between the input and button */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for a polished look */
+}
+
+
+/* Rating Section */
+.rating-section {
+    margin-top: 30px;
+    padding: 15px;
+    border: 3px solid #337880;
+    border-radius: 12px;
+    background-color: #e0f4f5;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
+    overflow-y: auto;
+}
+
+
+
+/* Submit Button */
+.submit-button {
+    font-size: 1.1rem;
+    padding: 8px 15px;
+    border: 2px solid #337880;
+    border-radius: 8px;
+    background-color: #aedfe2;
+    color: #003333;
+    cursor: pointer;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.submit-button:hover {
+    background-color: #b0dede;
+    color: #002222;
+}
+
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .page-container {

@@ -1,122 +1,157 @@
+/* Page Layout */
 .page-container {
     display: flex;
     flex-wrap: wrap;
-    padding: 10px;  /* Reduced padding */
-    gap: 10px;  /* Reduced gap */
+    padding: 20px;
+    gap: 20px;
+    background-color: #cce7e8; /* Subtle darker teal background */
 }
 
+/* Left Panel */
 .left-panel {
     flex: 1;
-    padding: 10px;  /* Reduced padding */
+    padding: 15px;
+    background-color: #a3d0d2; /* Darker teal background */
+    border: 3px solid #245a59; /* Dark teal border */
+    border-radius: 12px;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15); /* Subtle shadow */
     max-width: 300px;
-    overflow: hidden;  /* Ensure no overflow on the left panel */
+    overflow-y: auto;
 }
 
+/* Right Panel */
 .right-panel {
     flex: 2;
-    padding: 5px;  /* Reduced padding */
+    padding: 15px;
+    background-color: #b2dede; /* Slightly lighter teal */
+    border: 3px solid #245a59; /* Dark teal border */
+    border-radius: 12px;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
     min-width: 400px;
 }
 
-h2 {
-    color: #006400; /* Dark green */
-    margin-bottom: 10px;  /* Reduced margin */
+/* Headings */
+h1, h2, h3 {
+    color: #012424; /* Very dark teal */
+    margin-bottom: 10px;
 }
 
+/* Parameter Controls */
 .parameter-controls {
-    margin: 10px 0;  /* Reduced margin */
+    display: flex;
+    flex-wrap: wrap; /* Allow sliders to wrap into two columns */
+    gap: 10px;
 }
 
-.parameter-controls div {
-    margin-bottom: 5px;  /* Reduced margin */
+.parameter-item {
+    flex: 1 1 45%; /* Each slider takes up ~45% of the row */
 }
 
-.parameter-controls label {
+.parameter-item label {
     display: block;
     margin-bottom: 5px;
+    color: #012424; /* Dark teal for labels */
+    font-weight: bold;
 }
 
-.parameter-controls input {
+.parameter-item input {
     width: 100%;
+    background-color: #73a7a9; /* Medium teal slider track */
+    height: 8px;
+    border-radius: 5px;
+    outline: none;
 }
 
+.parameter-item input::-webkit-slider-thumb {
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    background-color: #245a59; /* Dark teal slider thumb */
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.parameter-item input:hover::-webkit-slider-thumb {
+    transform: scale(1.2); /* Enlarge slider thumb on hover */
+    background-color: #012424; /* Very dark teal on hover */
+}
+
+/* Buttons */
 button {
-    padding: 8px 16px;
-    background-color: #006400; /* Dark green */
+    padding: 10px 20px;
+    background-color: #245a59; /* Dark teal button */
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     cursor: pointer;
     font-size: 1rem;
+    font-weight: bold;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 button:hover {
-    background-color: #32cd32; /* Lighter green */
+    background-color: #012424; /* Very dark teal on hover */
+    transform: translateY(-2px); /* Lift effect */
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3); /* Deepened shadow */
 }
 
+/* Results Container */
 .results-container {
     display: flex;
-    gap: 5px;  /* Space between chart and explanation */
-    align-items: flex-start;  /* Align items at the top */
+    flex-direction: column; /* Stack chart and explanation vertically */
+    gap: 20px;
+    align-items: center;
 }
 
+/* Chart Container */
 .chart-container {
-    width: 50%;  /* Half width for the chart */
-    height: 100px;  /* Adjusted height to fit the layout */
+    width: 80%; /* Centered and slightly smaller chart */
+    height: 300px;
+    background-color: #8bb7b8; /* Medium teal */
+    border: 3px solid #245a59;
+    border-radius: 12px;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
     position: relative;
 }
 
+/* Chart Explanation */
 .chart-explanation {
-    width: 50%;  /* Half width for the explanation */
-    padding: 1px;  /* Add some padding */
-    box-sizing: border-box;  /* Ensure padding is included in the width */
-    height: 100px;  /* Same height as the chart */
-    overflow: hidden;  /* Hide overflow */
+    width: 80%; /* Match chart width */
+    padding: 15px;
+    background-color: #b2dede; /* Slightly lighter teal */
+    border: 3px solid #245a59;
+    border-radius: 12px;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
 }
 
 .chart-explanation h3 {
-    color: #006400; /* Dark green */
+    color: #012424; /* Very dark teal */
+    font-weight: bold;
 }
 
-.chart-explanation p {
-    margin-bottom: 10px;  /* Reduced margin */
+.chart-explanation p, .chart-explanation ul, .chart-explanation li {
+    color: #012424;
+    font-size: 0.9rem; /* Slightly smaller font for explanation text */
+    margin-bottom: 10px;
 }
 
-.chart-explanation ul {
-    list-style-type: disc;
-    margin-left: 20px;
-}
-
-.chart-explanation li {
-    margin-bottom: 5px;  /* Reduced margin */
-}
-
-/* Responsive adjustments */
-@media (min-width: 768px) {
+/* Responsive Adjustments */
+@media (max-width: 768px) {
     .page-container {
-        flex-direction: row;
+        flex-direction: column;
     }
 
-    .left-panel {
-        flex: 1;
-    }
-
-    .right-panel {
-        flex: 3;
+    .left-panel, .right-panel {
+        width: 100%;
     }
 
     .results-container {
-        flex-direction: column;  /* Stack chart and explanation vertically on larger screens */
+        width: 100%;
     }
 
-    .chart-container {
-        width: 100%;  /* Full width on larger screens */
-        height: 350px;  /* Larger chart size for larger screens */
-    }
-
-    .chart-explanation {
-        width: 100%;  /* Full width on larger screens */
-        height: auto;  /* Adjust height */
-        max-height: none;  /* Remove height restriction for larger screens */
+    .chart-container, .chart-explanation {
+        width: 100%; /* Full width on smaller screens */
     }
 }

@@ -1,51 +1,92 @@
 import React, { useEffect, useState } from "react";
-import mermaid from "mermaid";
 import "./ExplainabilityPage.css";
 
 const ExplainabilityPage = () => {
   const [expandedItems, setExpandedItems] = useState({});
   const [description, setDescription] = useState("");
+  const [isOverlayOpen, setIsOverlayOpen] = useState(false)
 
-  // Mermaid graph definition
-  const mermaidGraph = `
-  graph TD
-  A[User Input: Prompt] --> B[Preprocessing: Tokenization]
-  B --> C[Embeddings: Converting Tokens to Vectors]
-  C --> D[Transformer Layers: Processing Through Neural Networks]
-  D --> E[Output: Generating Responses]
+  const toggleOverlay = () => {
+    setIsOverlayOpen(!isOverlayOpen);
+  };
 
-  click A showDescription "User Input: The user provides a prompt, such as a question or instruction."
-  click B showDescription "Preprocessing: The input is tokenized into smaller units (tokens)."
-  click C showDescription "Embeddings: Tokens are transformed into numerical vectors representing their meaning."
-  click D showDescription "Transformer Layers: Neural networks process vectors, applying context and learned patterns."
-  click E showDescription "Output: The model generates meaningful text or other content as the result."
-`;
-
-useEffect(() => {
-    // Check if the code is running in the browser
-    if (typeof window !== "undefined" && typeof document !== "undefined") {
-      const renderMermaid = async () => {
-        try {
-          const element = document.querySelector(".mermaid");
-          if (element) {
-            await mermaid.render("mermaidGraph", mermaidGraph, (code) => {
-              element.innerHTML = code;
-            });
-          } else {
-            console.error("Mermaid container not found in the DOM.");
-          }
-          window.showDescription = (text) => setDescription(text);
-        } catch (err) {
-          console.error("Mermaid rendering error:", err);
-        }
-      };
-  
-      mermaid.initialize({ startOnLoad: true });
-      renderMermaid(); // Call the renderMermaid function
-    } else {
-      console.error("Document or window is undefined. Mermaid rendering skipped.");
-    }
-  }, [mermaidGraph]);
+    // AI stages data
+  const aiStages = [
+    {
+      id: 1,
+      title: "User Input",
+      description:
+        "The AI receives input from the user, such as text, voice, or images. This marks the starting point of the interaction.",
+    },
+    {
+      id: 2,
+      title: "Process Input",
+      description:
+        "The input is pre-processed by tokenizing and encoding it into a numerical format that the AI model can understand.",
+      subStages: [
+        {
+          title: "Tokenize & Encode",
+          description:
+            "The input is broken into smaller units (tokens), such as words or subwords, and converted into numerical vectors for AI processing.",
+        },
+      ],
+    },
+    {
+      id: 3,
+      title: "Analyze Context",
+      description:
+        "The AI identifies patterns, intent, and context from the input, ensuring relevance and coherence in its response.",
+      subStages: [
+        {
+          title: "Analyze Context",
+          description:
+            "The system examines relationships and patterns in the input, leveraging past interactions or data if necessary.",
+        },
+      ],
+    },
+    {
+      id: 4,
+      title: "Generate Response",
+      description:
+        "Using its trained model, the AI generates an initial response based on the user's input and the identified context.",
+      subStages: [
+        {
+          title: "Predict Next Step",
+          description:
+            "The AI predicts the next logical output by leveraging the patterns it learned during training.",
+        },
+        {
+          title: "Fine-Tune Output",
+          description:
+            "The generated content is adjusted to ensure relevance, appropriateness, and alignment with the user's intent.",
+        },
+      ],
+    },
+    {
+      id: 5,
+      title: "Refine & Adjust",
+      description:
+        "The AI refines the output by applying quality checks, safety rules, and moderation to ensure it meets ethical standards.",
+      subStages: [
+        {
+          title: "Apply Rules & Filters",
+          description:
+            "The AI applies predefined rules to filter out harmful, biased, or inappropriate content.",
+        },
+        {
+          title: "Check for Issues",
+          description:
+            "The output is reviewed to ensure there are no errors or safety concerns, and it aligns with quality standards.",
+        },
+      ],
+    },
+    {
+      id: 6,
+      title: "Send Output",
+      description:
+        "The finalized response is sent to the user in the appropriate format, completing the interaction process.",
+    },
+  ];
 
   // Toggle educational resource details
   const toggleExpand = (id) => {
@@ -95,29 +136,32 @@ useEffect(() => {
       id: 3,
       title: "Case Study: Google DeepMind’s AlphaFold",
       description:
-        "DeepMind’s AlphaFold revolutionized biology by predicting protein structures with high accuracy.",
+        " DeepMind’s AlphaFold revolutionized biology by predicting protein structures with high accuracy.",
       details:
         "AlphaFold tackled protein folding using deep learning, shortening discovery time and advancing drug design and disease understanding.",
     },
     {
-        id: 4,
-        title: 'Case Study: Singapore’s GovTech Chatbots',
-        description: 'Singapore’s government introduced AI-powered chatbots to improve public service delivery.',
-        details: 'The introduction of chatbots like "Ask Jamie" enabled Singapore to manage millions of citizen inquiries efficiently. The chatbots understood natural language and responded to FAQs related to public services, functioning 24/7 without human intervention. By openly addressing data privacy concerns and ensuring secure communication channels, the government fostered public trust in AI technologies while significantly reducing operational costs and response times.'
+      id: 4,
+      title: "Case Study: Singapore’s GovTech Chatbots",
+      description:
+        "Singapore’s government introduced AI-powered chatbots to improve public service delivery.",
+      details:
+        'The introduction of chatbots like "Ask Jamie" enabled Singapore to manage millions of citizen inquiries efficiently. The chatbots understood natural language and responded to FAQs related to public services, functioning 24/7 without human intervention. By openly addressing data privacy concerns and ensuring secure communication channels, the government fostered public trust in AI technologies while significantly reducing operational costs and response times.',
     },
     {
-        id: 5,
-        title: 'Case Study: Predictive Policing in the US',
-        description: 'Predictive policing systems faced challenges in addressing systemic biases.',
-        details: 'Predictive policing tools were designed to analyse historical crime data and predict areas of potential criminal activity. However, biases in the training data—such as over-policing in minority neighborhoods—led to disproportionate targeting of specific demographic groups. While efforts to include fairness algorithms and increase transparency improved the situation in some cases, many systems continued to face criticism, highlighting the importance of ethical data use and stakeholder involvement in AI deployment.'
+      id: 5,
+      title: "Case Study: Predictive Policing in the US",
+      description: "Predictive policing systems faced challenges in addressing systemic biases.",
+      details:
+        "Predictive policing tools were designed to analyze historical crime data and predict areas of potential criminal activity. However, biases in the training data—such as over-policing in minority neighborhoods—led to disproportionate targeting of specific demographic groups. While efforts to include fairness algorithms and increase transparency improved the situation in some cases, many systems continued to face criticism, highlighting the importance of ethical data use and stakeholder involvement in AI deployment.",
     },
     {
-        id: 6,
-        title: 'Case Study: BBVA’s Digital Transformation',
-        description: 'BBVA used AI for personalised services and improved customer onboarding.',
-        details: 'BBVA leveraged AI for customer segmentation, providing tailored financial product recommendations. Through transparency in their AI processes—such as explaining why a customer was offered a particular loan or service—the bank built trust and compliance with regulatory standards. The improved user experience and customer satisfaction levels resulted in BBVA being recognised as a leader in ethical AI implementation in the financial industry.'
-    }
-
+      id: 6,
+      title: "Case Study: BBVA’s Digital Transformation",
+      description: "BBVA used AI for personalized services and improved customer onboarding.",
+      details:
+        "BBVA leveraged AI for customer segmentation, providing tailored financial product recommendations. Through transparency in their AI processes—such as explaining why a customer was offered a particular loan or service—the bank built trust and compliance with regulatory standards. The improved user experience and customer satisfaction levels resulted in BBVA being recognized as a leader in ethical AI implementation in the financial industry.",
+    },
   ];
 
   // Bias Detection Insights content
@@ -214,13 +258,59 @@ useEffect(() => {
       <div className="main-content">
         <div className="section">
           <h2>Model Explainability Visuals</h2>
-          <div className="mermaid">Loading...</div>
+          <div className="flowchart">
+            <img
+              src="/mermaid-diagram-2025-03-21-175131.svg"
+              alt="AI Decision Making Flowchart"
+              className="flowchart-image"
+              onClick={toggleOverlay}
+              style={{
+                cursor: "pointer",
+                width: "100%", 
+                maxWidth: "1200px",
+                height: "auto", 
+                display: "block",
+                margin: "auto",
+              }}
+            />
+          </div>
+
+          {isOverlayOpen && (
+            <div className="overlay" onClick={toggleOverlay}>
+              <div className="overlay-content">
+                <img
+                  src="/mermaid-diagram-2025-03-21-175131.svg"
+                  alt="Expanded AI Flowchart"
+                  className="expanded-image"
+                  style={{
+                    maxWidth: "95%", // Use most of the viewport for enlargement
+                    maxHeight: "90%", // Ensure proper scaling
+                    display: "block",
+                    margin: "auto",
+                  }}
+                />
+                <p style={{ textAlign: "center", color: "white" }}>Click anywhere to close.</p>
+              </div>
+            </div>
+          )}
           <div className="description-box">
-            <h3>Stage Description</h3>
-            <p>
-              {description ||
-                "Click on a node in the flowchart to see its description."}
-            </p>
+            <h3>AI Decision-Making Process</h3>
+            <ul>
+              {aiStages.map((stage) => (
+                <li key={stage.id} style={{ marginBottom: "20px" }}>
+                  <strong>{stage.title}:</strong> {stage.description}
+                  {stage.subStages && (
+                    <ul style={{ marginLeft: "20px", marginTop: "10px" }}>
+                      {stage.subStages.map((subStage, idx) => (
+                        <li key={idx} style={{ marginBottom: "10px" }}>
+                          <strong>{subStage.title}:</strong> {subStage.description}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
 
