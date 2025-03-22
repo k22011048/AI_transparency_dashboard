@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { Bar } from 'react-chartjs-2';
+import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js'; // ✅ Import required components
 import './DataTransparencyPage.css';
+
+// ✅ Register chart components
+ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 const DataTransparencyPage = () => {
     const [policySummaries, setPolicySummaries] = useState([]);
@@ -10,12 +15,8 @@ const DataTransparencyPage = () => {
     useEffect(() => {
         const fetchPolicySummaries = async () => {
             try {
-                const response = await fetch('/api/data-transparency/policy-summaries/');
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
-                }
-                const data = await response.json();
-                setPolicySummaries(data);
+                const response = await axios.get('http://127.0.0.1:8000/api/data-transparency/policy-summaries/');
+                setPolicySummaries(response.data);
             } catch (error) {
                 console.error('Error fetching policy summaries:', error);
             }
@@ -23,12 +24,8 @@ const DataTransparencyPage = () => {
 
         const fetchComparisonData = async () => {
             try {
-                const response = await fetch('/api/data-transparency/comparison-data/');
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
-                }
-                const data = await response.json();
-                setComparisonData(data);
+                const response = await axios.get('http://127.0.0.1:8000/api/data-transparency/comparison-data/');
+                setComparisonData(response.data);
             } catch (error) {
                 console.error('Error fetching comparison data:', error);
             }
@@ -36,18 +33,14 @@ const DataTransparencyPage = () => {
 
         const fetchChartData = async () => {
             try {
-                const response = await fetch('/api/data-transparency/chart-data/');
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
-                }
-                const data = await response.json();
-                if (data.length > 0) {
+                const response = await axios.get('http://127.0.0.1:8000/api/data-transparency/chart-data/');
+                if (response.data.length > 0) {
                     setChartData({
-                        labels: data[0].labels,
+                        labels: response.data[0].labels,
                         datasets: [
                             {
-                                label: data[0].modelName,
-                                data: data[0].values,
+                                label: response.data[0].modelName,
+                                data: response.data[0].values,
                                 backgroundColor: 'rgba(75, 192, 192, 0.6)',
                                 borderColor: 'rgba(75, 192, 192, 1)',
                                 borderWidth: 1,
@@ -55,7 +48,7 @@ const DataTransparencyPage = () => {
                         ],
                     });
                 } else {
-                    console.error("Chart data is empty!");
+                    console.error('Chart data is empty!');
                 }
             } catch (error) {
                 console.error('Error fetching chart data:', error);
@@ -71,7 +64,6 @@ const DataTransparencyPage = () => {
         <div className="data-transparency-page">
             <h1 className="heading">AI Model Data Transparency Page</h1>
 
-            {/* Policy Summaries Section */}
             <section className="policy-summary-section">
                 <h2>AI Policy Summarization</h2>
                 {policySummaries.length > 0 ? (
@@ -86,7 +78,6 @@ const DataTransparencyPage = () => {
                 )}
             </section>
 
-            {/* Comparison Table Section */}
             <section className="comparison-table-section">
                 <h2>Comparison Table</h2>
                 {comparisonData.length > 0 ? (
@@ -115,7 +106,6 @@ const DataTransparencyPage = () => {
                 )}
             </section>
 
-            {/* Privacy Impact Chart Section */}
             <section className="privacy-impact-section">
                 <h2>Visual Privacy Impact Assessments</h2>
                 {chartData ? (
