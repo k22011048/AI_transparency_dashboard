@@ -96,8 +96,6 @@ class Command(BaseCommand):
                 "recommended_model": "Google Bard",
                 "recommendation_reason": "Google Bard represents cutting-edge innovation through its ability to combine the latest AI advances in practical ways. Bard pioneered the integration of real-time web information with AI-generated responses, providing up-to-date answers. Its approach reduces inaccuracies by connecting generated content to verifiable sources. Bard can run code and perform calculations within conversations. The system checks its own responses before presenting them to users, improving accuracy. Bard continuously adds new capabilities without requiring complete retraining. These innovations make it particularly valuable for situations requiring both creative problem-solving and factual accuracy."
             },
-            
-            # New features with simplified language
             {
                 "name": "Multilingual Capability",
                 "description": "Enables AI to work effectively in multiple languages and cultural contexts. Multilingual AI goes beyond simple translation to understand language-specific expressions, cultural references, and regional differences. This capability allows systems to serve diverse communities worldwide, breaking down language barriers in communication. Advanced multilingual AI maintains consistent quality across all supported languages, including less commonly used ones.",
@@ -130,7 +128,6 @@ class Command(BaseCommand):
             }
         ]
 
-        # Populate the database
         for feature in features:
             obj, created = Feature.objects.get_or_create(**feature)
             if created:

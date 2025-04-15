@@ -13,7 +13,6 @@ def areas_with_questions(request):
 def chatbot_query(request):
     question_text = request.data.get("query")
     try:
-        # Fetch the question from the database
         question = Question.objects.get(question_text=question_text)
         answer_text = question.answer_text or "No answer provided for this question yet."
     except Question.DoesNotExist:
