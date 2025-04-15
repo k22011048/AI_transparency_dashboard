@@ -1,4 +1,4 @@
 from django.http import HttpResponse
 
 def homepage(request):
-    return HttpResponse("<h1>Welcome to the AI Transparency Dashboard!</h1>")
+    return HttpResponse("✅ Backend is live and responding!")
