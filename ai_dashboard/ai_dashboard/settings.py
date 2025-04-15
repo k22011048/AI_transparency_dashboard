@@ -21,12 +21,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-_mz9eqijrwn1*i-(ol17w+6s35_xct@7zuvlp4gv_x()7g_xj4'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
-ALLOWED_HOSTS = ['k22011048.pythonanywhere.com']
+
+ALLOWED_HOSTS = ['*']  # Railway will handle the domain
+
+DEBUG = os.environ.get('DEBUG', 'False') == 'True'
+
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'changeme')  # We'll set this in Railway
+
 
 
 # Application definition
