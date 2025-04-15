@@ -61,7 +61,7 @@ const AIModelList = () => {
                         <strong>Model Size:</strong> {selectedModel.modelSize}
                     </p>
                     <img
-                        src={`http://127.0.0.1:8000${selectedModel.architectureDiagram}`}
+                        src={`/architecture_diagrams/${selectedModel.architectureDiagram.split('/').pop()}`}
                         alt="Architecture Diagram"
                         className="architecture-diagram"
                     />

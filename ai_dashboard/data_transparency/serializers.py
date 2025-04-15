@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import  PolicySummary, ComparisonData, ChartData
+from .models import PolicySummary, ComparisonData, ChartData
 
 class PolicySummarySerializer(serializers.ModelSerializer):
     class Meta:

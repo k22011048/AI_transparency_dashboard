@@ -21,16 +21,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = 'django-insecure-_mz9eqijrwn1*i-(ol17w+6s35_xct@7zuvlp4gv_x()7g_xj4'
 
 # SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = True
 
-
-ALLOWED_HOSTS = ['*']  # Railway will handle the domain
-
-DEBUG = os.environ.get('DEBUG', 'False') == 'True'
-
-SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'changeme')  # We'll set this in Railway
-
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -142,13 +138,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 ASGI_APPLICATION = 'mychatbot.routing.application'
 
-
-SECURE_SSL_REDIRECT = True
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
-
-CORS_ALLOWED_ORIGINS = [
-    'https://yourfrontend.netlify.app',
-]
-
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

@@ -6,9 +6,10 @@
     font-family: Arial, sans-serif;
     color: #003333;
     background-color: #e0f7f9;
-    height: 100vh;
+    min-height: 100vh;
 }
 
+/* Tabs Styles */
 .tabs {
     display: flex;
     justify-content: center;
@@ -43,6 +44,7 @@
     font-weight: bold;
 }
 
+/* Model Details Section */
 .model-details {
     width: 80%;
     padding: 20px;
@@ -68,16 +70,18 @@
     margin: 10px 0;
 }
 
+/* Architecture Diagram Styling */
 .architecture-diagram {
     display: block;
-    width: 80%;
-    height: auto;
+    max-width: 100%;  /* Image stays at original size unless screen smaller */
+    height: auto;     /* Maintain aspect ratio */
     margin: 20px auto;
     border: 2px solid #337880;
     border-radius: 12px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 }
 
+/* Mobile Responsive */
 @media (max-width: 768px) {
     .tabs {
         flex-direction: column;

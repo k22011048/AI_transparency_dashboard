@@ -20,7 +20,7 @@ body, html {
 .heading {
     color: #337880;
     text-align: center;
-    margin: 1rem 0;
+    margin: 1.5rem 0;
 }
 
 .section {
@@ -34,17 +34,26 @@ body, html {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+/* Chart styling */
 .chart {
     width: 100%;
     height: 400px;
+    margin-top: 1rem;
 }
 
-.resource-list, .audit-log-list {
+/* Lists */
+.resource-list, 
+.audit-log-list,
+.milestone-list,
+.cert-list {
     list-style-type: none;
     padding: 0;
 }
 
-.resource-item, .audit-log-item {
+.resource-item,
+.audit-log-item,
+.milestone-list li,
+.cert-list li {
     background: #d7f1f3;
     margin: 0.5rem 0;
     padding: 0.5rem;
@@ -53,10 +62,14 @@ body, html {
     transition: background-color 0.3s ease;
 }
 
-.resource-item:hover, .audit-log-item:hover {
+.resource-item:hover,
+.audit-log-item:hover,
+.milestone-list li:hover,
+.cert-list li:hover {
     background-color: #b0dede;
 }
 
+/* Links */
 a {
     text-decoration: none;
     color: #337880;
@@ -66,4 +79,61 @@ a {
 a:hover {
     text-decoration: underline;
     color: #003333;
+}
+
+/* Compliance Dashboard Table */
+.compliance-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+.compliance-table th, 
+.compliance-table td {
+    border: 1px solid #337880;
+    padding: 0.5rem;
+    text-align: left;
+    font-size: 1rem;
+}
+
+.compliance-table th {
+    background-color: #aedfe2;
+    color: #003333;
+}
+
+.compliance-table tr:nth-child(even) {
+    background-color: #d7f1f3;
+}
+
+.compliance-table tr:hover {
+    background-color: #b0dede;
+    transition: background-color 0.3s ease;
+}
+
+/* Milestones */
+.milestone-list li {
+    line-height: 1.6;
+}
+
+.milestone-list strong {
+    color: #337880;
+}
+
+/* Certifications Section */
+.cert-list li p {
+    margin: 0.3rem 0 0 0;
+    font-size: 0.95rem;
+    color: #003333;
+}
+
+@media (max-width: 768px) {
+    .reports-audits-page {
+        padding: 0.5rem;
+    }
+
+    .compliance-table th,
+    .compliance-table td {
+        font-size: 0.9rem;
+        padding: 0.4rem;
+    }
 }

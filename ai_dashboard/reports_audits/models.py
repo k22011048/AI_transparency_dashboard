@@ -24,3 +24,29 @@ class AuditLog(models.Model):
 
     def __str__(self):
         return f"{self.timestamp} - {self.event}"
+
+class Milestone(models.Model):
+    date = models.DateField()
+    title = models.CharField(max_length=200)
+    description = models.TextField()
+    event_type = models.CharField(max_length=50)  # e.g., 'Policy Update', 'Regulatory Response', 'Public Reaction'
+
+    def __str__(self):
+        return f"{self.date} - {self.title}"
+
+class ComplianceStatus(models.Model):
+    regulation = models.CharField(max_length=50)  # e.g., 'GDPR', 'CCPA', 'HIPAA'
+    status = models.CharField(max_length=20)  # e.g., 'Compliant', 'Non-Compliant', 'Pending'
+    last_updated = models.DateField()
+
+    def __str__(self):
+        return f"{self.regulation} - {self.status}"
+
+class Certification(models.Model):
+    name = models.CharField(max_length=100)  # e.g., 'ISO 27001'
+    status = models.CharField(max_length=20)  # e.g., 'Certified', 'In Progress', 'Not Certified'
+    issued_date = models.DateField(null=True, blank=True)
+    expiry_date = models.DateField(null=True, blank=True)
+
+    def __str__(self):
+        return f"{self.name} - {self.status}"

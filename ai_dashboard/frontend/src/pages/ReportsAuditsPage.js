@@ -1,112 +1,156 @@
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import Plotly from 'plotly.js-dist';
 import './ReportsAuditsPage.css';
 
 const ReportsAuditsPage = () => {
-    const [setTransparencyScores] = useState([]);
-    const [auditLogs, setAuditLogs] = useState([]);
+    const BASE_URL = 'http://localhost:8000'; // Make sure this matches your Django server
 
-    // Static data for regulatory compliance links and explanations
+    const [transparencyScores, setTransparencyScores] = useState([]);
+    const [auditLogs, setAuditLogs] = useState([]);
+    const [milestones, setMilestones] = useState([]);
+    const [compliance, setCompliance] = useState([]);
+    const [certifications, setCertifications] = useState([]);
+
     const regulatoryLinks = [
         {
             id: 1,
             name: "Information Commissioner's Office (ICO)",
             url: "https://ico.org.uk/",
-            description: "The UK's independent regulator for data protection and privacy. The ICO enforces the UK GDPR and the Data Protection Act 2018, ensuring organisations handle personal data lawfully, fairly, and transparently. It also provides guidance on AI governance, privacy impact assessments, and compliance with emerging AI and data protection laws."
+            description: "The UK's independent regulator for data protection and privacy. The ICO enforces the UK GDPR and the Data Protection Act 2018."
         },
         {
             id: 2,
             name: "European Data Protection Board (EDPB)",
             url: "https://edpb.europa.eu/",
-            description: "An independent EU body that ensures the consistent application of GDPR across all EU member states. The EDPB issues guidelines, recommendations, and best practices for data protection authorities, businesses, and policymakers."
+            description: "Ensures consistent application of GDPR across all EU member states."
         },
         {
             id: 3,
             name: "Department for Science, Innovation and Technology (DSIT)",
             url: "https://www.gov.uk/government/organisations/department-for-science-innovation-and-technology",
-            description: "A UK government department responsible for shaping the country’s AI policy and regulatory framework, focusing on trust, transparency, and accountability."
+            description: "Responsible for shaping the UK’s AI policy and regulatory framework."
         },
         {
             id: 4,
             name: "Financial Conduct Authority (FCA)",
             url: "https://www.fca.org.uk/",
-            description: "The UK's financial regulatory body overseeing financial markets and services. The FCA ensures compliance of AI-driven financial products with financial regulations and consumer protection laws."
+            description: "Oversees financial services including AI-driven products for regulatory compliance."
         },
         {
             id: 5,
             name: "Competition and Markets Authority (CMA)",
             url: "https://www.gov.uk/government/organisations/competition-and-markets-authority",
-            description: "The UK's competition regulator, actively examining the impact of AI technologies on competition and transparency in consumer-facing applications."
+            description: "Ensures fair competition and transparency in AI consumer applications."
         },
         {
             id: 6,
             name: "National Institute of Standards and Technology (NIST)",
             url: "https://www.nist.gov/",
-            description: "A U.S. agency that develops AI and cybersecurity standards influencing regulatory frameworks worldwide, including the UK and EU."
+            description: "Develops global AI and cybersecurity standards."
         }
     ];
 
     useEffect(() => {
-        const fetchScores = async () => {
-            try {
-                const response = await fetch('/api/transparency-reports/');
-                const text = await response.text();
-                try {
-                    const data = JSON.parse(text);
-                    setTransparencyScores(data);
+        axios.get(`${BASE_URL}/api/reports-audits/transparency-reports/`).then(res => {
+            setTransparencyScores(res.data);
+            const months = res.data.map(r => r.month);
+            const scores = res.data.map(r => r.score);
 
-                    const chartData = data.map(score => ({
-                        x: [score.month],
-                        y: [score.score],
-                        type: 'bar',
-                        name: 'Transparency Score'
-                    }));
+            const trace = {
+                x: months,
+                y: scores,
+                type: 'scatter',
+                mode: 'lines+markers',
+                line: { color: '#337880' },
+                name: 'Transparency Score'
+            };
 
-                    const layout = {
-                        title: 'Transparency Reports',
-                        xaxis: { title: 'Month' },
-                        yaxis: { title: 'Score' }
-                    };
+            const layout = {
+                title: 'Transparency Score Evolution',
+                xaxis: { title: 'Month' },
+                yaxis: { title: 'Score' }
+            };
 
-                    Plotly.newPlot('transparencyChart', chartData, layout);
-                } catch (error) {
-                    console.error('Error parsing transparency report JSON:', error);
-                    console.log('Response text:', text);
-                }
-            } catch (error) {
-                console.error('Error fetching transparency reports:', error);
-            }
-        };
+            Plotly.newPlot('transparencyChart', [trace], layout);
+        }).catch(err => console.error(err));
 
-        const fetchLogs = async () => {
-            try {
-                const response = await fetch('/api/audit-logs/');
-                const text = await response.text();
-                try {
-                    const data = JSON.parse(text);
-                    setAuditLogs(data);
-                } catch (error) {
-                    console.error('Error parsing audit logs JSON:', error);
-                    console.log('Response text:', text);
-                }
-            } catch (error) {
-                console.error('Error fetching audit logs:', error);
-            }
-        };
-
-        fetchScores();
-        fetchLogs();
+        axios.get(`${BASE_URL}/api/reports-audits/audit-logs/`).then(res => setAuditLogs(res.data)).catch(err => console.error(err));
+        axios.get(`${BASE_URL}/api/reports-audits/milestones/`).then(res => setMilestones(res.data)).catch(err => console.error(err));
+        axios.get(`${BASE_URL}/api/reports-audits/compliance-statuses/`).then(res => setCompliance(res.data)).catch(err => console.error(err));
+        axios.get(`${BASE_URL}/api/reports-audits/certifications/`).then(res => setCertifications(res.data)).catch(err => console.error(err));
     }, []);
 
     return (
         <div className="reports-audits-page">
             <h1 className="heading">AI Transparency Reports & Audits Page</h1>
-            <div className="section">
-                <h2 className="heading">Transparency Reports</h2>
+
+            <section className="section">
+                <h2>Transparency Reports</h2>
                 <div id="transparencyChart" className="chart"></div>
-            </div>
-            <div className="section">
-                <h2 className="heading">Regulatory Compliance Links</h2>
+            </section>
+
+            <section className="section">
+                <h2>Compliance Dashboard</h2>
+                <table className="compliance-table">
+                    <thead>
+                        <tr>
+                            <th>Regulation</th>
+                            <th>Status</th>
+                            <th>Last Updated</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {compliance.map(item => (
+                            <tr key={item.id}>
+                                <td>{item.regulation}</td>
+                                <td>{item.status}</td>
+                                <td>{item.last_updated}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </section>
+
+            <section className="section">
+                <h2>Milestone Timeline</h2>
+                <ul className="milestone-list">
+                    {milestones.map(milestone => (
+                        <li key={milestone.id}>
+                            <strong>{milestone.date} - {milestone.event_type}</strong>: {milestone.title}
+                            <p>{milestone.description}</p>
+                        </li>
+                    ))}
+                </ul>
+            </section>
+
+            <section className="section">
+                <h2>Audit Logs</h2>
+                <ul className="audit-log-list">
+                    {auditLogs.map(log => (
+                        <li key={log.id}>
+                            <strong>{log.timestamp}</strong>: {log.event} - {log.details}
+                        </li>
+                    ))}
+                </ul>
+            </section>
+
+            <section className="section">
+                <h2>Certifications & Badges</h2>
+                <ul className="cert-list">
+                    {certifications.map(cert => (
+                        <li key={cert.id}>
+                            <strong>{cert.name}</strong>: {cert.status}
+                            {cert.issued_date && (
+                                <p>Issued: {cert.issued_date} | Expires: {cert.expiry_date}</p>
+                            )}
+                        </li>
+                    ))}
+                </ul>
+            </section>
+
+            <section className="section">
+                <h2>Regulatory Compliance Links</h2>
                 <ul className="resource-list">
                     {regulatoryLinks.map(link => (
                         <li key={link.id} className="resource-item">
@@ -114,17 +158,7 @@ const ReportsAuditsPage = () => {
                         </li>
                     ))}
                 </ul>
-            </div>
-            <div className="section">
-                <h2 className="heading">Audit Logs</h2>
-                <ul className="audit-log-list">
-                    {auditLogs.map(log => (
-                        <li key={log.id} className="audit-log-item">
-                            <strong>{log.timestamp}:</strong> {log.event} - {log.details}
-                        </li>
-                    ))}
-                </ul>
-            </div>
+            </section>
         </div>
     );
 };

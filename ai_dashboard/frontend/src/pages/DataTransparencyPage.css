@@ -34,11 +34,26 @@
     border-radius: 12px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     color: #003333;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.policy-summary-card:hover {
+    background-color: #d7f1f3;
 }
 
 .policy-summary-card h3 {
     margin: 0;
     color: #337880;
+}
+
+.policy-details {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #337880;
+    color: #003333;
+    font-size: 0.95rem;
+    line-height: 1.6;
 }
 
 .comparison-table {
@@ -70,7 +85,64 @@
     transition: background-color 0.3s ease-in-out;
 }
 
+.comparison-table td span {
+    text-decoration: underline dotted;
+    cursor: help;
+}
+
 .chart {
     width: 100%;
     height: 400px;
+}
+
+.small-pie-chart {
+    max-width: 400px;
+    margin: 2rem auto;
+}
+
+.third-party-sharing-explanation {
+    margin-top: 2rem;
+    padding: 1rem;
+    background-color: #e0f4f5;
+    border-radius: 12px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    color: #003333;
+}
+
+.third-party-sharing-explanation h3 {
+    color: #337880;
+    margin-bottom: 0.5rem;
+}
+
+.third-party-sharing-explanation p {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.third-party-sharing-explanation ul {
+    margin-left: 1.5rem;
+    margin-bottom: 1rem;
+    list-style-type: disc;
+}
+
+.third-party-sharing-explanation li {
+    font-size: 1rem;
+    margin-bottom: 0.3rem;
+}
+
+@media (max-width: 768px) {
+    .data-transparency-page {
+        padding: 0.5rem;
+    }
+
+    .comparison-table th,
+    .comparison-table td {
+        font-size: 0.9rem;
+        padding: 0.4rem;
+    }
+
+    .policy-details {
+        font-size: 0.9rem;
+    }
 }

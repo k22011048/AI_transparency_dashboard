@@ -17,6 +17,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from . import views  # Import the root view
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('', views.homepage, name='home'),  # Add this for the root URL
@@ -31,7 +33,9 @@ urlpatterns = [
     path('api/data-transparency/', include('data_transparency.urls')),
     path('api/features/', include('ai_recommendation.urls')),
     path('api/ai-models/', include('model_details.urls')),
+    path('api/reports-audits/', include ('reports_audits.urls')),
     path('admin/', admin.site.urls),
 ]
-
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

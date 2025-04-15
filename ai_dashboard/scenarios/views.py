@@ -4,7 +4,6 @@ from rest_framework.response import Response
 from .models import Scenario, SimulationResult
 from .serializers import ScenarioSerializer, SimulationResultSerializer
 
-
 class ScenarioViewSet(viewsets.ModelViewSet):
     queryset = Scenario.objects.all()
     serializer_class = ScenarioSerializer
@@ -19,19 +18,19 @@ class ScenarioViewSet(viewsets.ModelViewSet):
         scores = {
             param: min(100, float(value) * weightings.get(param, 1.0))
             for param, value in parameters.items()
+            if param in selected_axes
         }
 
-        overall_score = sum(scores[axis] for axis in selected_axes) / len(selected_axes)
+        overall_score = sum(scores.values()) / len(scores)
 
         SimulationResult.objects.create(
             scenario=scenario,
-            transparency_score=int(scores.get("transparency_level", 0)),
             privacy_score=int(scores.get("privacy_level", 0)),
             security_score=int(scores.get("security_level", 0)),
-            bias_mitigation_score=int(scores.get("bias_mitigation_level", 0)),
-            fairness_score=int(scores.get("fairness_level", 0)),
-            user_control_score=int(scores.get("user_control_level", 0)),
-            auditability_score=int(scores.get("auditability_level", 0)),
+            transparency_score=int(scores.get("transparency_level", 0)),
+            trust_score=int(scores.get("trust_level", 0)),
+            ethics_score=int(scores.get("ethics_level", 0)),
+            bias_score=int(scores.get("bias_level", 0)),
             overall_score=int(overall_score)
         )
 
@@ -44,7 +43,6 @@ class ScenarioViewSet(viewsets.ModelViewSet):
             "simulation_result": response_data,
             "selected_axes": selected_axes
         })
-
 
 class SimulationResultViewSet(viewsets.ModelViewSet):
     queryset = SimulationResult.objects.all()

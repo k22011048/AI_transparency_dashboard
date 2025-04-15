@@ -1,3 +1,4 @@
+// ScenariosPage.js
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import {
@@ -14,6 +15,15 @@ import './ScenariosPage.css';
 
 ChartJS.register(RadialLinearScale, PointElement, LineElement, Filler, Tooltip, Legend);
 
+const AXIS_LABELS = {
+  privacy_level: "Privacy",
+  security_level: "Security",
+  transparency_level: "Transparency",
+  trust_level: "Trust",
+  ethics_level: "Ethics",
+  bias_level: "Bias"
+};
+
 const ScenariosPage = () => {
   const [scenarios, setScenarios] = useState([]);
   const [selectedScenario, setSelectedScenario] = useState(null);
@@ -21,16 +31,6 @@ const ScenariosPage = () => {
   const [selectedAxes, setSelectedAxes] = useState([]);
   const [simulationResult, setSimulationResult] = useState(null);
   const [loading, setLoading] = useState(false);
-
-  const DEFAULT_PARAMETERS = {
-    transparency_level: 50,
-    privacy_level: 50,
-    security_level: 50,
-    bias_mitigation_level: 50,
-    fairness_level: 50,
-    user_control_level: 50,
-    auditability_level: 50
-  };
 
   useEffect(() => {
     axios.get("http://127.0.0.1:8000/api/scenarios/")
@@ -40,7 +40,7 @@ const ScenariosPage = () => {
 
   useEffect(() => {
     if (selectedScenario) {
-      setParameters({ ...DEFAULT_PARAMETERS, ...selectedScenario.parameters });
+      setParameters({ ...selectedScenario.parameters });
       setSelectedAxes(selectedScenario.selected_axes);
     }
   }, [selectedScenario]);
@@ -90,8 +90,8 @@ const ScenariosPage = () => {
 
             <div className="parameter-controls">
               {Object.keys(parameters).map((param) => (
-                <div key={param}>
-                  <label>{param.replace('_', ' ')}</label>
+                <div key={param} className="parameter-item">
+                  <label>{AXIS_LABELS[param]}</label>
                   <input
                     type="range"
                     min="0"
@@ -119,7 +119,7 @@ const ScenariosPage = () => {
               <div className="chart-container">
                 <Radar
                   data={{
-                    labels: selectedAxes.map(axis => axis.replace('_', ' ')),
+                    labels: selectedAxes.map(axis => AXIS_LABELS[axis]),
                     datasets: [{
                       label: 'Scores',
                       data: selectedAxes.map(axis => simulationResult[axis]),
@@ -134,10 +134,8 @@ const ScenariosPage = () => {
               <div className="chart-explanation">
                 <h3>Understanding the Radar Chart</h3>
                 <p>
-                  A radar chart, also known as a spider chart or web chart, is a graphical method
-                  of displaying multivariate data. Each axis represents one of the variables, and
-                  the data points are connected to form a polygon. The closer the points are to
-                  the outer edge, the higher the score for that variable.
+                  A radar chart is used to visualize performance across multiple categories.
+                  The closer the line is to the outer edge, the higher the score in that category.
                 </p>
               </div>
             </div>
