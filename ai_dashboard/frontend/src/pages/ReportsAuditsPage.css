@@ -4,7 +4,8 @@ body, html {
     width: 100%;
     height: 100%;
     font-family: Arial, sans-serif;
-    background-color: #b0d5d9;
+    background-color: #e0f7f9;
+    color: #003333;
 }
 
 .reports-audits-page {
@@ -17,7 +18,7 @@ body, html {
 }
 
 .heading {
-    color: #333;
+    color: #337880;
     text-align: center;
     margin: 1rem 0;
 }
@@ -27,8 +28,9 @@ body, html {
     max-width: 800px;
     margin: 1rem 0;
     padding: 1rem;
-    background-color: #b0d5d9;
-    border-radius: 8px;
+    background-color: #e0f4f5;
+    border-radius: 12px;
+    border: 2px solid #337880;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -43,17 +45,25 @@ body, html {
 }
 
 .resource-item, .audit-log-item {
-    background: #fafafa;
+    background: #d7f1f3;
     margin: 0.5rem 0;
     padding: 0.5rem;
-    border-radius: 5px;
+    border-radius: 8px;
+    border: 1px solid #337880;
+    transition: background-color 0.3s ease;
+}
+
+.resource-item:hover, .audit-log-item:hover {
+    background-color: #b0dede;
 }
 
 a {
     text-decoration: none;
-    color: #007bff;
+    color: #337880;
+    transition: color 0.3s ease;
 }
 
 a:hover {
     text-decoration: underline;
+    color: #003333;
 }

@@ -1,62 +1,59 @@
-/* Page Layout */
 .page-container {
     display: flex;
     flex-wrap: wrap;
     padding: 20px;
     gap: 20px;
-    background-color: #cce7e8; /* Subtle darker teal background */
+    background-color: #e0f7f9;
+    color: #003333;
+    font-family: Arial, sans-serif;
 }
 
-/* Left Panel */
 .left-panel {
     flex: 1;
     padding: 15px;
-    background-color: #a3d0d2; /* Darker teal background */
-    border: 3px solid #245a59; /* Dark teal border */
+    background-color: #e0f4f5;
+    border: 2px solid #337880;
     border-radius: 12px;
-    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15); /* Subtle shadow */
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
     max-width: 300px;
     overflow-y: auto;
 }
 
-/* Right Panel */
 .right-panel {
     flex: 2;
     padding: 15px;
-    background-color: #b2dede; /* Slightly lighter teal */
-    border: 3px solid #245a59; /* Dark teal border */
+    background-color: #e0f4f5;
+    border: 2px solid #337880;
     border-radius: 12px;
     box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
     min-width: 400px;
 }
 
-/* Headings */
 h1, h2, h3 {
-    color: #012424; /* Very dark teal */
+    color: #337880;
     margin-bottom: 10px;
 }
 
-/* Parameter Controls */
 .parameter-controls {
     display: flex;
-    flex-wrap: wrap; /* Allow sliders to wrap into two columns */
+    flex-wrap: wrap;
     gap: 10px;
 }
 
 .parameter-item {
-    flex: 1 1 45%; /* Each slider takes up ~45% of the row */
+    flex: 1 1 45%;
 }
 
 .parameter-item label {
     display: block;
     margin-bottom: 5px;
-    color: #012424; /* Dark teal for labels */
+    color: #003333;
     font-weight: bold;
 }
 
 .parameter-item input {
     width: 100%;
-    background-color: #73a7a9; /* Medium teal slider track */
+    background-color: #aedfe2;
     height: 8px;
     border-radius: 5px;
     outline: none;
@@ -66,21 +63,20 @@ h1, h2, h3 {
     appearance: none;
     width: 15px;
     height: 15px;
-    background-color: #245a59; /* Dark teal slider thumb */
+    background-color: #337880;
     border-radius: 50%;
     cursor: pointer;
     transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
 .parameter-item input:hover::-webkit-slider-thumb {
-    transform: scale(1.2); /* Enlarge slider thumb on hover */
-    background-color: #012424; /* Very dark teal on hover */
+    transform: scale(1.2);
+    background-color: #003333;
 }
 
-/* Buttons */
 button {
     padding: 10px 20px;
-    background-color: #245a59; /* Dark teal button */
+    background-color: #337880;
     color: white;
     border: none;
     border-radius: 8px;
@@ -92,52 +88,48 @@ button {
 }
 
 button:hover {
-    background-color: #012424; /* Very dark teal on hover */
-    transform: translateY(-2px); /* Lift effect */
-    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3); /* Deepened shadow */
+    background-color: #003333;
+    transform: translateY(-2px);
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
 }
 
-/* Results Container */
 .results-container {
     display: flex;
-    flex-direction: column; /* Stack chart and explanation vertically */
+    flex-direction: column;
     gap: 20px;
     align-items: center;
 }
 
-/* Chart Container */
 .chart-container {
-    width: 80%; /* Centered and slightly smaller chart */
+    width: 80%;
     height: 300px;
-    background-color: #8bb7b8; /* Medium teal */
-    border: 3px solid #245a59;
+    background-color: #d7f1f3;
+    border: 2px solid #337880;
     border-radius: 12px;
     box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
     position: relative;
 }
 
-/* Chart Explanation */
 .chart-explanation {
-    width: 80%; /* Match chart width */
+    width: 80%;
     padding: 15px;
-    background-color: #b2dede; /* Slightly lighter teal */
-    border: 3px solid #245a59;
+    background-color: #e0f4f5;
+    border: 2px solid #337880;
     border-radius: 12px;
     box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
 }
 
 .chart-explanation h3 {
-    color: #012424; /* Very dark teal */
+    color: #337880;
     font-weight: bold;
 }
 
 .chart-explanation p, .chart-explanation ul, .chart-explanation li {
-    color: #012424;
-    font-size: 0.9rem; /* Slightly smaller font for explanation text */
+    color: #003333;
+    font-size: 0.9rem;
     margin-bottom: 10px;
 }
 
-/* Responsive Adjustments */
 @media (max-width: 768px) {
     .page-container {
         flex-direction: column;
@@ -152,6 +144,6 @@ button:hover {
     }
 
     .chart-container, .chart-explanation {
-        width: 100%; /* Full width on smaller screens */
+        width: 100%;
     }
 }

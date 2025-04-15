@@ -13,39 +13,39 @@ class ScenarioViewSet(viewsets.ModelViewSet):
     def simulate(self, request, pk=None):
         scenario = self.get_object()
         parameters = request.data.get('parameters', {})
-        selected_axes = scenario.selected_axes  # Get the selected 3 parameters for the chart
+        selected_axes = scenario.selected_axes
+        weightings = scenario.weightings or {}
 
-        # Validate selected_axes
-        if len(selected_axes) != 3 or not all(axis in parameters for axis in selected_axes):
-            return Response({"error": "Invalid axes configuration."}, status=400)
+        scores = {
+            param: min(100, float(value) * weightings.get(param, 1.0))
+            for param, value in parameters.items()
+        }
 
-        # Compute scores for the selected axes
-        scores = {axis: float(parameters[axis]) * 1.5 for axis in selected_axes}
+        overall_score = sum(scores[axis] for axis in selected_axes) / len(selected_axes)
 
-        # Cap scores at 100
-        for axis in scores:
-            scores[axis] = min(100, scores[axis])
-
-        # Calculate overall score (average of the 3 axes)
-        overall_score = sum(scores.values()) / 3
-
-        # Save the simulation results
-        result = SimulationResult.objects.create(
+        SimulationResult.objects.create(
             scenario=scenario,
             transparency_score=int(scores.get("transparency_level", 0)),
             privacy_score=int(scores.get("privacy_level", 0)),
             security_score=int(scores.get("security_level", 0)),
             bias_mitigation_score=int(scores.get("bias_mitigation_level", 0)),
+            fairness_score=int(scores.get("fairness_level", 0)),
+            user_control_score=int(scores.get("user_control_level", 0)),
+            auditability_score=int(scores.get("auditability_level", 0)),
             overall_score=int(overall_score)
         )
 
-        # Serialize and return results
-        serializer = SimulationResultSerializer(result)
-        return Response({'simulation_result': serializer.data})
+        response_data = {
+            "overall_score": int(overall_score),
+            **{k: int(v) for k, v in scores.items()}
+        }
+
+        return Response({
+            "simulation_result": response_data,
+            "selected_axes": selected_axes
+        })
+
 
 class SimulationResultViewSet(viewsets.ModelViewSet):
-    """
-    A ViewSet for managing simulation results.
-    """
     queryset = SimulationResult.objects.all()
     serializer_class = SimulationResultSerializer

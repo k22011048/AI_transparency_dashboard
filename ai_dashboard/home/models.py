@@ -4,7 +4,7 @@ class AIModel(models.Model):
     name = models.CharField(max_length=100)
     company = models.CharField(max_length=100)
     use_cases = models.TextField()
-    transparency_level = models.CharField(max_length=10)
+    transparency_level = models.CharField(max_length=10)  # High / Medium / Low
 
     def __str__(self):
         return self.name
@@ -16,5 +16,5 @@ class AIModel(models.Model):
 
 class TrustScore(models.Model):
     ai_model = models.ForeignKey(AIModel, on_delete=models.CASCADE, related_name='trust_scores')
-    score = models.IntegerField()  # Between 0 and 10
+    score = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)

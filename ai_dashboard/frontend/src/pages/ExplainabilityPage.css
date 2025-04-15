@@ -1,58 +1,43 @@
 .explainability-page {
     display: flex;
     flex-direction: column;
-    /* Stack sections vertically */
     align-items: center;
-    /* Center horizontally */
     justify-content: center;
-    /* Center vertically */
     min-height: 100vh;
-    /* Make the page take up the full height of the viewport */
-    background-color: #bed8d7;
-    /* Teal background */
-    color: #004d40;
-    /* Dark green text */
+    background-color: #e0f7f9;
+    color: #003333;
     padding: 20px;
     box-sizing: border-box;
+    font-family: Arial, sans-serif;
 }
 
 .heading {
     text-align: center;
-    color: #00695c;
+    color: #337880;
     margin-bottom: 40px;
-    /* Space below the title */
     font-size: 2.5rem;
 }
 
 .section {
     width: 100%;
-    /* Ensure sections span the full width */
     max-width: 800px;
-    /* Restrict the maximum width for large screens */
     padding: 20px;
-    background-color: #d7f5f4;
-    border-radius: 10px;
-    outline: 2px solid #004d40;
-    /* Dark green border */
+    background-color: #e0f4f5;
+    border-radius: 12px;
+    border: 2px solid #337880;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
-    /* Space between sections */
 }
 
-/* Added explicit styles for .educational-resources */
 .educational-resources {
     width: 100%;
     max-width: 800px;
-    /* Restrict the width for consistency */
     padding: 20px;
-    background-color: #cdeeed;
-    /* Light teal box */
-    border-radius: 10px;
-    outline: 2px solid #004d40;
-    /* Dark green border to match other sections */
+    background-color: #e0f4f5;
+    border-radius: 12px;
+    border: 2px solid #337880;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
-    /* Adds space below the educational resources */
 }
 
 .resource-list {
@@ -61,24 +46,23 @@
 }
 
 .resource-item {
-    background-color: #bde3e3;
+    background-color: #d7f1f3;
     padding: 10px;
     margin-bottom: 10px;
-    border-radius: 5px;
-    outline: 1px solid #004d40;
-    /* Matches dark green outline theme */
+    border-radius: 8px;
+    border: 1px solid #337880;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
 }
 
 .resource-item:hover {
-    background-color: #a8dcdc;
-    /* Slightly darker teal when hovered */
+    background-color: #b0dede;
 }
 
 .details {
     margin-top: 10px;
     font-size: 14px;
-    color: #004d40;
+    color: #003333;
 }
 
 .flowchart {
@@ -89,9 +73,9 @@
 }
 
 .mermaid {
-    background-color: #d7f5f4;
-    border: 2px solid #004d40;
-    border-radius: 5px;
+    background-color: #e0f4f5;
+    border: 2px solid #337880;
+    border-radius: 8px;
     padding: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     text-align: center;
@@ -100,18 +84,18 @@
 .description-box {
     margin-top: 20px;
     padding: 15px;
-    background-color: #cdeeed;
-    border: 2px solid #004d40;
-    border-radius: 5px;
+    background-color: #e0f4f5;
+    border: 2px solid #337880;
+    border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    color: #004d40;
-    font-family: Arial, sans-serif;
+    color: #003333;
 }
 
 .description-box h3 {
     margin-top: 0;
+    margin-bottom: 10px;
     font-size: 18px;
-    color: #00695c;
+    color: #337880;
 }
 
 .description-box p {
@@ -119,51 +103,24 @@
     font-size: 16px;
 }
 
-@media (max-width: 600px) {
-    .heading {
-        font-size: 2rem; /* Smaller font size for headings */
-    }
-    .section, .educational-resources {
-        padding: 15px; /* Adjust padding */
-    }
-    .description-box h3 {
-        font-size: 16px; /* Smaller font size for subheadings */
-    }
-}
-
-  
-
-  
-
-  
-  .description-box {
-    margin-top: 20px;
-  }
-  
-  .description-box h3 {
-    margin-bottom: 10px;
-  }
-  
-  .description-box ul {
+.description-box ul {
     list-style-type: none;
     padding: 0;
-  }
-  
-  .description-box li {
+}
+
+.description-box li {
     margin-bottom: 10px;
-  }
-  
-  /* Flowchart styling */
+}
+
 .flowchart-image {
-    width: 100%; /* Responsive scaling */
-    max-width: 1200px; /* Larger maximum width for readability */
+    width: 100%;
+    max-width: 1200px;
     height: auto;
     display: block;
     margin: auto;
-  }
-  
-  /* Overlay styling */
-  .overlay {
+}
+
+.overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -174,16 +131,30 @@
     justify-content: center;
     align-items: center;
     z-index: 1000;
-  }
-  
-  .overlay-content {
+}
+
+.overlay-content {
     text-align: center;
-  }
-  
-  .expanded-image {
-    max-width: 95%; /* Enlarged image occupies most of the viewport */
-    max-height: 90%; /* Proper height scaling */
+}
+
+.expanded-image {
+    max-width: 95%;
+    max-height: 90%;
     display: block;
     margin: auto;
-  }
-  
+}
+
+@media (max-width: 600px) {
+    .heading {
+        font-size: 2rem;
+    }
+
+    .section,
+    .educational-resources {
+        padding: 15px;
+    }
+
+    .description-box h3 {
+        font-size: 16px;
+    }
+}

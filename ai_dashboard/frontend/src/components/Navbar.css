@@ -1,76 +1,113 @@
-/* Navbar Container */
 .navbar {
-    background-color: #035838; /* Dark green background */
-    padding: 15px 30px; /* Larger padding for a more spacious look */
+    background-color: #035838;
+    padding: 15px 30px;
     display: flex;
-    justify-content: space-between; /* Space between logo and navigation links */
-    align-items: center; /* Vertically center items */
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-    position: sticky; /* Stick to the top of the page */
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    position: sticky;
     top: 0;
     left: 0;
-    width: 100%; /* Ensure full width */
-    z-index: 1000; /* Ensure it stays above other content */
+    width: 100%;
+    z-index: 1000;
 }
 
-/* Logo Styling */
 .logo img {
-    height: 60px; /* Increase logo size */
-    width: auto; /* Maintain aspect ratio */
-    cursor: pointer; /* Clickable logo */
-    margin-right: 20px; /* Add spacing between logo and navigation links */
+    height: 60px;
+    width: auto;
+    cursor: pointer;
+    margin-right: 20px;
 }
 
-/* Navbar List */
-.navbar ul {
-    list-style: none; /* Remove bullet points */
-    display: flex; /* Align links horizontally */
-    flex-grow: 1; /* Allow links to fill available space */
-    justify-content: space-around; /* Evenly distribute links */
-    align-items: center; /* Vertically align links in the middle */
+.nav-links {
+    list-style: none;
+    display: flex;
+    flex-grow: 1;
+    justify-content: space-around;
+    align-items: center;
     margin: 0;
     padding: 0;
-    width: 100%; /* Ensure full width */
+    width: 100%;
 }
 
-/* Navbar Links */
-.navbar ul li a {
-    text-decoration: none; /* Remove underline */
-    color: white; /* White text for contrast */
-    font-size: 1.5rem; /* Slightly larger for visibility */
+.nav-links li a {
+    text-decoration: none;
+    color: white;
+    font-size: 1.5rem;
     font-weight: bold;
-    padding: 10px 20px; /* Larger padding for consistent spacing */
-    border-radius: 8px; /* Rounded corners */
-    transition: background-color 0.3s ease-in-out; /* Smooth hover */
-    text-align: center; /* Center align text */
-    display: block; /* Ensure full clickable area */
+    padding: 10px 20px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease-in-out;
+    text-align: center;
+    display: block;
+    
 }
 
-/* Hover Effect for Links */
-.navbar ul li a:hover {
-    background-color: #2b5c2b; /* Slightly lighter green hover effect */
-    color: #ffffff; /* Keep text white for readability */
+.nav-links li a:hover {
+    background-color: #2b5c2b;
+    color: #ffffff;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
+/* Hamburger Icon Default */
+.hamburger {
+    display: none;
+}
+
+/* Responsive for Mobile & Tablet */
+@media (max-width: 1250px) {
     .navbar {
-        flex-direction: column; /* Stack logo and links vertically */
-        padding: 10px; /* Adjust padding for smaller screens */
-    }
-
-    .navbar ul {
-        flex-direction: column; /* Stack links vertically */
-        width: 100%; /* Make links take up full width */
-        text-align: center; /* Center-align links */
-    }
-
-    .navbar ul li a {
-        width: 100%; /* Make each link stretch full width */
-        text-align: center;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px;
     }
 
     .logo img {
-        height: 50px; /* Slightly smaller logo for compact screens */
+        height: 50px;
+    }
+
+    .hamburger {
+        display: flex;
+        flex-direction: column;
+        cursor: pointer;
+        gap: 5px;
+        margin: 0 auto; 
+        padding-top: 10px;
+    }
+
+    .bar {
+        width: 25px;
+        height: 3px;
+        background-color: white;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        text-align: center;
+        padding-top: 10px;
+    }
+
+    .nav-links.open {
+        display: flex;
+    }
+
+    .nav-links li a {
+        width: 100%;
+        padding: 12px 0;
+    }
+
+    /* Hamburger Animation */
+    .hamburger.open .bar:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .hamburger.open .bar:nth-child(2) {
+        opacity: 0;
+    }
+
+    .hamburger.open .bar:nth-child(3) {
+        transform: rotate(-45deg) translate(6px, -6px);
     }
 }

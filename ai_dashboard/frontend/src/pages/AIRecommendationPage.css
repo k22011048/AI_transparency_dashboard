@@ -1,18 +1,22 @@
-/* Dashboard grid layout */
+
+
 .recommendation-dashboard {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 20px;
     padding: 20px;
+    justify-content: center;
+    background-color: #e0f7f9;
+    color: #003333;
+    font-family: Arial, sans-serif;
 }
 
-/* Feature card styling */
 .feature-card {
-    border: 1px solid #ddd;
-    border-radius: 8px;
+    border: 2px solid #337880;
+    border-radius: 12px;
     padding: 16px;
-    background-color: #00796b; /* Teal background for cards */
-    color: #ffffff; /* White text */
+    background-color: #00796b;
+    color: white;
     text-align: center;
     cursor: pointer;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -20,50 +24,49 @@
 
 .feature-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); /* Add shadow for hover */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
 }
 
-/* Modal styling */
 .modal {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    background-color: rgba(0, 0, 0, 0.5);
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1000; /* Ensure it overlays everything */
+    z-index: 1000;
 }
 
 .modal-content {
-    background-color: rgb(120, 189, 174);
+    background-color: #e0f4f5;
     padding: 20px;
     border-radius: 12px;
     text-align: center;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Modal shadow */
-    width: 80%; /* Responsive modal width */
-    max-width: 500px; /* Limit max size */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    width: 80%;
+    max-width: 500px;
+    color: #003333;
 }
 
 .modal-content h3 {
     margin: 0;
     font-size: 1.8rem;
-    color: #00796b; /* Teal heading for content */
+    color: #00796b;
 }
 
 .modal-content p {
     margin: 10px 0;
     font-size: 1.2rem;
-    color: #333; /* Dark gray for readability */
 }
 
 .modal-content button {
     margin-top: 15px;
-    padding: 8px 16px;
+    padding: 10px 20px;
     border: none;
-    background-color: #00796b; /* Teal button */
+    background-color: #00796b;
     color: white;
     font-size: 1rem;
     cursor: pointer;
@@ -72,5 +75,5 @@
 }
 
 .modal-content button:hover {
-    background-color: #005b50; /* Slightly darker teal for hover effect */
+    background-color: #005b50;
 }

@@ -1,16 +1,14 @@
-/* Page Layout */
 .ai-models-page {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 20px;
     font-family: Arial, sans-serif;
-    color: #337880;
-    background-color: #96d1cc; /* Light blue background for visual appeal */
+    color: #003333;
+    background-color: #e0f7f9;
     height: 100vh;
 }
 
-/* Tabs Section */
 .tabs {
     display: flex;
     justify-content: center;
@@ -18,17 +16,17 @@
     padding: 0;
     margin: 20px 0;
     border-bottom: 3px solid #337880;
-    width: 80%; /* Takes a significant proportion of the page */
+    width: 80%;
 }
 
 .tabs li {
-    flex: 1; /* Distribute tabs evenly */
+    flex: 1;
     text-align: center;
     padding: 15px 20px;
     cursor: pointer;
     border: 2px solid transparent;
-    background-color: #e0f7f9;
-    color: #337880;
+    background-color: #e0f4f5;
+    color: #003333;
     transition: all 0.3s ease-in-out;
     border-radius: 12px 12px 0 0;
 }
@@ -45,9 +43,8 @@
     font-weight: bold;
 }
 
-/* Model Details Section */
 .model-details {
-    width: 80%; /* Takes significant space on the page */
+    width: 80%;
     padding: 20px;
     margin-top: 20px;
     background-color: #e0f4f5;
@@ -55,6 +52,7 @@
     border-radius: 12px;
     box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
     overflow-y: auto;
+    color: #003333;
 }
 
 .model-details h3 {
@@ -80,10 +78,9 @@
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
     .tabs {
-        flex-direction: column; /* Stack tabs vertically on small screens */
+        flex-direction: column;
     }
 
     .tabs li {

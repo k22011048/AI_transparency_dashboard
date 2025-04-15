@@ -12,18 +12,16 @@ import {
 import { Radar } from 'react-chartjs-2';
 import './ScenariosPage.css';
 
-// Register Chart.js components
 ChartJS.register(RadialLinearScale, PointElement, LineElement, Filler, Tooltip, Legend);
 
 const ScenariosPage = () => {
   const [scenarios, setScenarios] = useState([]);
   const [selectedScenario, setSelectedScenario] = useState(null);
   const [parameters, setParameters] = useState({});
-  const [selectedAxes, setSelectedAxes] = useState(["transparency_level", "privacy_level", "security_level"]);
+  const [selectedAxes, setSelectedAxes] = useState([]);
   const [simulationResult, setSimulationResult] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  // Default parameter structure
   const DEFAULT_PARAMETERS = {
     transparency_level: 50,
     privacy_level: 50,
@@ -34,33 +32,27 @@ const ScenariosPage = () => {
     auditability_level: 50
   };
 
-  // Fetch scenarios from the backend
   useEffect(() => {
     axios.get("http://127.0.0.1:8000/api/scenarios/")
-      .then((response) => {
-        setScenarios(response.data);
-      })
+      .then((response) => setScenarios(response.data))
       .catch((error) => console.error("Error fetching scenarios:", error));
   }, []);
 
-  // Update parameters and selected axes when a scenario is selected
   useEffect(() => {
     if (selectedScenario) {
       setParameters({ ...DEFAULT_PARAMETERS, ...selectedScenario.parameters });
-      setSelectedAxes(selectedScenario.selected_axes || ["transparency_level", "privacy_level", "security_level"]);
+      setSelectedAxes(selectedScenario.selected_axes);
     }
   }, [selectedScenario]);
 
-  // Handle simulation request
   const handleSimulate = () => {
-    if (!selectedScenario) {
-      console.error("No scenario selected");
-      return;
-    }
+    if (!selectedScenario) return;
+
     setLoading(true);
     axios.post(`http://127.0.0.1:8000/api/scenarios/${selectedScenario.id}/simulate/`, { parameters })
       .then((response) => {
         setSimulationResult(response.data.simulation_result);
+        setSelectedAxes(response.data.selected_axes);
         setLoading(false);
       })
       .catch((error) => {
@@ -69,18 +61,8 @@ const ScenariosPage = () => {
       });
   };
 
-  // Handle slider adjustments for parameters
   const handleParameterChange = (param, value) => {
     setParameters(prevParams => ({ ...prevParams, [param]: parseInt(value, 10) }));
-  };
-
-  // Handle axis selection for the radar chart
-  const handleAxisChange = (index, newAxis) => {
-    setSelectedAxes(prevAxes => {
-      const newAxes = [...prevAxes];
-      newAxes[index] = newAxis;
-      return newAxes;
-    });
   };
 
   return (
@@ -90,7 +72,9 @@ const ScenariosPage = () => {
         <label htmlFor="scenario-select">Select Scenario:</label>
         <select
           id="scenario-select"
-          onChange={(e) => setSelectedScenario(scenarios.find(scenario => scenario.id == e.target.value))}
+          onChange={(e) =>
+            setSelectedScenario(scenarios.find(scenario => scenario.id == e.target.value))
+          }
         >
           <option value="">--Select a Scenario--</option>
           {scenarios.map((scenario) => (
@@ -104,7 +88,6 @@ const ScenariosPage = () => {
           <div>
             <h2>Selected Scenario: {selectedScenario.name}</h2>
 
-            {/* Parameter Sliders */}
             <div className="parameter-controls">
               {Object.keys(parameters).map((param) => (
                 <div key={param}>
@@ -119,21 +102,6 @@ const ScenariosPage = () => {
                 </div>
               ))}
             </div>
-
-            {/* Axis Selection */}
-            <h3>Select Radar Chart Axes</h3>
-            {selectedAxes.map((axis, index) => (
-              <div key={index}>
-                <label>Axis {index + 1}:</label>
-                <select value={axis} onChange={(e) => handleAxisChange(index, e.target.value)}>
-                  {Object.keys(parameters).map((param) => (
-                    <option key={param} value={param}>
-                      {param.replace('_', ' ')}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            ))}
 
             <button onClick={handleSimulate}>Simulate</button>
           </div>
@@ -159,9 +127,7 @@ const ScenariosPage = () => {
                       borderColor: '#32cd32'
                     }]
                   }}
-                  options={{
-                    maintainAspectRatio: false,
-                  }}
+                  options={{ maintainAspectRatio: false }}
                 />
               </div>
 
