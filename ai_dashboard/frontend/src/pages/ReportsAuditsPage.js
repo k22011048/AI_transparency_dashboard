@@ -4,7 +4,7 @@ import Plotly from 'plotly.js-dist';
 import './ReportsAuditsPage.css';
 
 const ReportsAuditsPage = () => {
-    const BASE_URL = 'http://localhost:8000'; // Make sure this matches your Django server
+    const BASE_URL = process.env.REACT_APP_API_URL;
 
     const [transparencyScores, setTransparencyScores] = useState([]);
     const [auditLogs, setAuditLogs] = useState([]);

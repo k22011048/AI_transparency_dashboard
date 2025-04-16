@@ -4,19 +4,20 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faComments } from "@fortawesome/free-solid-svg-icons";
 import "./ChatbotPage.css";
 
+const API_BASE_URL = process.env.REACT_APP_API_URL;
+
 const ChatbotPage = () => {
     const [areas, setAreas] = useState([]);
     const [selectedArea, setSelectedArea] = useState(null);
     const [selectedQuestion, setSelectedQuestion] = useState(null);
     const [response, setResponse] = useState("");
     const [feedback, setFeedback] = useState("");
-    const [isOpen, setIsOpen] = useState(false); // State for pop-up visibility
+    const [isOpen, setIsOpen] = useState(false);
 
-    // Fetch areas and their questions
     useEffect(() => {
         const fetchAreas = async () => {
             try {
-                const res = await axios.get("http://localhost:8000/chatbot/areas/");
+                const res = await axios.get(`${API_BASE_URL}/chatbot/areas/`);
                 setAreas(res.data);
             } catch (error) {
                 console.error("Error fetching areas:", error);
@@ -33,22 +34,22 @@ const ChatbotPage = () => {
     const handleQuestionSelect = async (question) => {
         setSelectedQuestion(question);
         try {
-            const res = await axios.post("http://localhost:8000/chatbot/query/", {
+            const res = await axios.post(`${API_BASE_URL}/chatbot/query/`, {
                 query: question.question_text,
             });
-            setResponse(res.data.answer); // Display the backend answer in the UI
+            setResponse(res.data.answer);
         } catch (error) {
             console.error("Error interacting with chatbot:", error);
-            setResponse("Sorry, something went wrong. Please try again later."); // Handle errors gracefully
+            setResponse("Sorry, something went wrong. Please try again later.");
         }
     };
 
     const handleFeedbackSubmit = async () => {
         try {
-            const res = await axios.post("http://localhost:8000/chatbot/feedback/", { feedback });
+            const res = await axios.post(`${API_BASE_URL}/chatbot/feedback/`, { feedback });
             if (res.data.status === "success") {
                 alert("Thank you for your feedback!");
-                setFeedback(""); // Clear feedback
+                setFeedback("");
             }
         } catch (error) {
             console.error("Error submitting feedback:", error);

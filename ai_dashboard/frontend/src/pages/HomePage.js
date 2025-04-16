@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./HomePage.css";
 
+const API_BASE_URL = process.env.REACT_APP_API_URL;
+
 const HomePage = () => {
     const [models, setModels] = useState([]);
     const [newScores, setNewScores] = useState({});
 
     useEffect(() => {
-        axios.get("http://127.0.0.1:8000/home/models/")
+        axios.get(`${API_BASE_URL}/home/models/`)
             .then((response) => setModels(response.data))
             .catch((error) => console.error("Error fetching AI models:", error));
     }, []);
@@ -19,10 +21,10 @@ const HomePage = () => {
     const submitScore = (id) => {
         const score = newScores[id];
         if (score >= 0 && score <= 10) {
-            axios.post(`http://127.0.0.1:8000/home/models/${id}/submit-score/`, { score })
+            axios.post(`${API_BASE_URL}/home/models/${id}/submit-score/`, { score })
                 .then(() => {
                     alert("Score submitted successfully.");
-                    axios.get("http://127.0.0.1:8000/home/models/")
+                    axios.get(`${API_BASE_URL}/home/models/`)
                         .then((response) => setModels(response.data));
                 })
                 .catch((error) => console.error("Error submitting score:", error));

@@ -1,10 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Bar, Pie } from 'react-chartjs-2';
-import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ArcElement } from 'chart.js';
+import {
+    Chart as ChartJS,
+    CategoryScale,
+    LinearScale,
+    BarElement,
+    Title,
+    Tooltip,
+    Legend,
+    ArcElement,
+} from 'chart.js';
 import './DataTransparencyPage.css';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ArcElement);
+
+const API_BASE_URL = process.env.REACT_APP_API_URL;
 
 const DataTransparencyPage = () => {
     const [policySummaries, setPolicySummaries] = useState([]);
@@ -15,17 +26,17 @@ const DataTransparencyPage = () => {
 
     useEffect(() => {
         const fetchPolicySummaries = async () => {
-            const response = await axios.get('http://127.0.0.1:8000/api/data-transparency/policy-summaries/');
+            const response = await axios.get(`${API_BASE_URL}/api/data-transparency/policy-summaries/`);
             setPolicySummaries(response.data);
         };
 
         const fetchComparisonData = async () => {
-            const response = await axios.get('http://127.0.0.1:8000/api/data-transparency/comparison-data/');
+            const response = await axios.get(`${API_BASE_URL}/api/data-transparency/comparison-data/`);
             setComparisonData(response.data);
         };
 
         const fetchChartData = async () => {
-            const response = await axios.get('http://127.0.0.1:8000/api/data-transparency/chart-data/');
+            const response = await axios.get(`${API_BASE_URL}/api/data-transparency/chart-data/`);
             const barData = response.data.find(d => d.chartType === 'bar');
             const pieData = response.data.find(d => d.chartType === 'pie');
 
@@ -47,7 +58,7 @@ const DataTransparencyPage = () => {
                     labels: pieData.labels,
                     datasets: [{
                         data: pieData.values,
-                        backgroundColor: ['#337880', '#aedfe2'],  // Matches your colour scheme
+                        backgroundColor: ['#337880', '#aedfe2'],
                         borderWidth: 1,
                     }],
                 });

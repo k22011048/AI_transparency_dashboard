@@ -1,4 +1,3 @@
-// ScenariosPage.js
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import {
@@ -14,6 +13,8 @@ import { Radar } from 'react-chartjs-2';
 import './ScenariosPage.css';
 
 ChartJS.register(RadialLinearScale, PointElement, LineElement, Filler, Tooltip, Legend);
+
+const API_BASE_URL = process.env.REACT_APP_API_URL;
 
 const AXIS_LABELS = {
   privacy_level: "Privacy",
@@ -33,7 +34,7 @@ const ScenariosPage = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    axios.get("http://127.0.0.1:8000/api/scenarios/")
+    axios.get(`${API_BASE_URL}/api/scenarios/`)
       .then((response) => setScenarios(response.data))
       .catch((error) => console.error("Error fetching scenarios:", error));
   }, []);
@@ -49,7 +50,7 @@ const ScenariosPage = () => {
     if (!selectedScenario) return;
 
     setLoading(true);
-    axios.post(`http://127.0.0.1:8000/api/scenarios/${selectedScenario.id}/simulate/`, { parameters })
+    axios.post(`${API_BASE_URL}/api/scenarios/${selectedScenario.id}/simulate/`, { parameters })
       .then((response) => {
         setSimulationResult(response.data.simulation_result);
         setSelectedAxes(response.data.selected_axes);

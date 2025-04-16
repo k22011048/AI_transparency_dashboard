@@ -2,19 +2,19 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./ModelDetailsPage.css";
 
+const API_BASE_URL = process.env.REACT_APP_API_URL;
+
 const AIModelList = () => {
     const [models, setModels] = useState([]);
     const [selectedModel, setSelectedModel] = useState(null);
 
     useEffect(() => {
-        // Fetch AI models data from the backend
         axios
-            .get("http://127.0.0.1:8000/api/ai-models/ai-models/")
+            .get(`${API_BASE_URL}/api/ai-models/ai-models/`)
             .then((response) => {
-                console.log("API Response:", response.data); // Debugging
+                console.log("API Response:", response.data);
                 setModels(response.data);
 
-                // Automatically select the first model if available
                 if (response.data.length > 0) {
                     setSelectedModel(response.data[0]);
                 }
@@ -24,21 +24,19 @@ const AIModelList = () => {
 
     return (
         <div className="ai-models-page">
-            {/* Tabs Section */}
             <ul className="tabs">
                 {Array.isArray(models) &&
                     models.map((model) => (
                         <li
                             key={model.id}
                             className={selectedModel?.id === model.id ? "active" : ""}
-                            onClick={() => setSelectedModel(model)} // Set the selected model on click
+                            onClick={() => setSelectedModel(model)}
                         >
                             {model.name}
                         </li>
                     ))}
             </ul>
 
-            {/* Model Details Section */}
             {selectedModel && (
                 <div className="model-details">
                     <h3>{selectedModel.name}</h3>
@@ -61,7 +59,7 @@ const AIModelList = () => {
                         <strong>Model Size:</strong> {selectedModel.modelSize}
                     </p>
                     <img
-                        src={`/architecture_diagrams/${selectedModel.architectureDiagram.split('/').pop()}`}
+                        src={`/architecture_diagrams/${selectedModel.architectureDiagram?.split('/').pop()}`}
                         alt="Architecture Diagram"
                         className="architecture-diagram"
                     />
