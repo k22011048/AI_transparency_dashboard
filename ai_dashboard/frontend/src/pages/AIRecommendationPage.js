@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import './AIRecommendationPage.css';
+const BASE_URL = process.env.REACT_APP_API_URL || "https://ai-transparency-dashboard.onrender.com";
 
 const AIRecommendationPage = () => {
     const [features, setFeatures] = useState([]);
     const [selectedFeature, setSelectedFeature] = useState(null);
 
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_API_URL}/api/features/`)
+        fetch(`${BASE_URL}/api/features/`)
             .then(response => response.json())
             .then(data => setFeatures(data));
     }, []);

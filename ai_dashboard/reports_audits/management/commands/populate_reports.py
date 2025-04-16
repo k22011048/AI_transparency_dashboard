@@ -9,19 +9,10 @@ from reports_audits.models import (
 from datetime import date
 
 class Command(BaseCommand):
-    help = 'Clears and populates Reports & Audits data for the dashboard'
+    help = 'Populates Reports & Audits data for the dashboard, preventing duplicates'
 
     def handle(self, *args, **kwargs):
-        # Clear existing data
-        TransparencyReport.objects.all().delete()
-        AuditLog.objects.all().delete()
-        Milestone.objects.all().delete()
-        ComplianceStatus.objects.all().delete()
-        Certification.objects.all().delete()
-
-        self.stdout.write(self.style.WARNING("Existing data cleared."))
-
-        # 1. Transparency Reports (Score evolution)
+        # 1. Transparency Reports
         reports = [
             {'month': '2023-01', 'score': 62},
             {'month': '2023-03', 'score': 68},
@@ -29,11 +20,13 @@ class Command(BaseCommand):
             {'month': '2023-09', 'score': 80},
             {'month': '2024-01', 'score': 88},
         ]
-
         for report in reports:
-            TransparencyReport.objects.create(month=report['month'], score=report['score'])
+            TransparencyReport.objects.update_or_create(
+                month=report['month'],
+                defaults={'score': report['score']}
+            )
 
-        # 2. Audit Logs (Change viewer + incident response)
+        # 2. Audit Logs
         logs = [
             {
                 'event': "ChatGPT updated to redact sensitive entities",
@@ -48,14 +41,13 @@ class Command(BaseCommand):
                 'details': "Gemini's public dashboard launched with interactive audit trails, transparency scores, and regulatory documentation."
             }
         ]
-
         for log in logs:
-            AuditLog.objects.create(
+            AuditLog.objects.update_or_create(
                 event=log['event'],
-                details=log['details']
+                defaults={'details': log['details']}
             )
 
-        # 3. Milestones (timeline with types)
+        # 3. Milestones
         milestones = [
             {
                 'date': date(2023, 1, 15),
@@ -76,30 +68,32 @@ class Command(BaseCommand):
                 'event_type': 'Public Reaction'
             }
         ]
-
         for milestone in milestones:
-            Milestone.objects.create(
-                date=milestone['date'],
+            Milestone.objects.update_or_create(
                 title=milestone['title'],
-                description=milestone['description'],
-                event_type=milestone['event_type']
+                defaults={
+                    'date': milestone['date'],
+                    'description': milestone['description'],
+                    'event_type': milestone['event_type']
+                }
             )
 
-        # 4. Compliance Statuses (compliance dashboard)
+        # 4. Compliance Statuses
         compliance_statuses = [
             {'regulation': 'GDPR', 'status': 'Compliant', 'last_updated': date(2023, 4, 1)},
             {'regulation': 'CCPA', 'status': 'Compliant', 'last_updated': date(2023, 4, 1)},
             {'regulation': 'HIPAA', 'status': 'Pending', 'last_updated': date(2023, 4, 1)},
         ]
-
         for item in compliance_statuses:
-            ComplianceStatus.objects.create(
+            ComplianceStatus.objects.update_or_create(
                 regulation=item['regulation'],
-                status=item['status'],
-                last_updated=item['last_updated']
+                defaults={
+                    'status': item['status'],
+                    'last_updated': item['last_updated']
+                }
             )
 
-        # 5. Certifications (badge display)
+        # 5. Certifications
         certifications = [
             {
                 'name': 'ISO 27001',
@@ -114,13 +108,14 @@ class Command(BaseCommand):
                 'expiry_date': None
             }
         ]
-
         for cert in certifications:
-            Certification.objects.create(
+            Certification.objects.update_or_create(
                 name=cert['name'],
-                status=cert['status'],
-                issued_date=cert['issued_date'],
-                expiry_date=cert['expiry_date']
+                defaults={
+                    'status': cert['status'],
+                    'issued_date': cert['issued_date'],
+                    'expiry_date': cert['expiry_date']
+                }
             )
 
-        self.stdout.write(self.style.SUCCESS("Reports & Audits data population complete!"))
+        self.stdout.write(self.style.SUCCESS("✅ Reports & Audits data loaded without duplicates."))

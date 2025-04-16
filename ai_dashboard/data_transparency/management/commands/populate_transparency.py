@@ -144,12 +144,34 @@ class Command(BaseCommand):
         ]
 
         for summary in policy_summaries:
-            PolicySummary.objects.create(**summary)
+            obj, created = PolicySummary.objects.update_or_create(
+                modelName=summary["modelName"],
+                defaults={
+                    "summary": summary["summary"],
+                    "details": summary["details"]
+                }
+            )
 
         for comparison in comparison_data:
-            ComparisonData.objects.create(**comparison)
+            obj, created = ComparisonData.objects.update_or_create(
+                modelName=comparison["modelName"],
+                defaults={
+                    "dataRetentionPolicies": comparison["dataRetentionPolicies"],
+                    "thirdPartySharing": comparison["thirdPartySharing"],
+                    "regulatoryCompliance": comparison["regulatoryCompliance"],
+                    "dataStorageLocation": comparison["dataStorageLocation"],
+                    "encryptionStandards": comparison["encryptionStandards"]
+                }
+            )
 
         for chart in chart_data:
-            ChartData.objects.create(**chart)
+            obj, created = ChartData.objects.update_or_create(
+                modelName=chart["modelName"],
+                chartType=chart["chartType"],
+                defaults={
+                    "labels": chart["labels"],
+                    "values": chart["values"]
+                }
+            )
 
         self.stdout.write(self.style.SUCCESS("Data Transparency data population complete!"))
