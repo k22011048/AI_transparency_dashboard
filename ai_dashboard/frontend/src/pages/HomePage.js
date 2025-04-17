@@ -117,7 +117,7 @@ const HomePage = () => {
                         <tbody>
                             {models.map((model) => (
                                 <tr key={model.id}>
-                                    <td>{model.company}</td>
+                                    <td>{model.name}</td>
                                     <td>
                                         <input
                                             className="rating-input"
