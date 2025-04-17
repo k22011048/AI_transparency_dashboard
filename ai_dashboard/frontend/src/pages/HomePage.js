@@ -109,7 +109,7 @@ const HomePage = () => {
                     <table>
                         <thead>
                             <tr>
-                                <th>Company</th>
+                                <th>Model</th>
                                 <th>Your Rating</th>
                                 <th>Action</th>
                             </tr>
