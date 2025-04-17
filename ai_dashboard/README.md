@@ -1,13 +1,13 @@
-# 🧠 AI Transparency Dashboard
+#  AI Transparency Dashboard
 
 An interactive platform to visualize and interpret AI systems, built using **Django** (backend) and **React** (frontend).
 
-🔗 **Live Site:**  
+ **Live Site:**  
 [https://aitransparencydashboard.netlify.app](https://aitransparencydashboard.netlify.app)
 
 ---
 
-## 📆 Project Structure
+## Project Structure
 
 ```
 AI_transparency_dashboard/
@@ -55,7 +55,7 @@ AI_transparency_dashboard/
 
 ---
 
-## ⚙️ Backend Setup (Django)
+##  Backend Setup (Django)
 
 ### 1. Install Python dependencies
 
@@ -80,7 +80,7 @@ Backend will be running at: [http://localhost:8000](http://localhost:8000)
 
 ---
 
-## 💻 Frontend Setup (React)
+##  Frontend Setup (React)
 
 ### 1. Install Node.js dependencies
 
@@ -99,9 +99,9 @@ Frontend will be running at: [http://localhost:3000](http://localhost:3000)
 
 ---
 
-## 📂 Requirements
+##  Requirements
 
-### ✅ Python Backend Dependencies (`requirements.txt`)
+###  Python Backend Dependencies (`requirements.txt`)
 ```txt
 asgiref==3.7.2
 bcrypt==3.2.0
@@ -127,7 +127,7 @@ pytz==2023.3.post1
 sqlparse==0.4.4
 ```
 
-### 🔁 React Frontend Dependencies (`package-lock.json`)
+###  React Frontend Dependencies (`package-lock.json`)
 ```txt
 @fortawesome/fontawesome-svg-core
 @fortawesome/free-solid-svg-icons
@@ -153,18 +153,18 @@ web-vitals
 ```
 
 
-## 🚀 Deployment
+##  Deployment
 
 - **Frontend:** Deployed to [Netlify](https://www.netlify.com/)
 - **Backend:** Deployed to Render
 
 ---
 
-## 📄 License
+##  License
 
 This project is provided for educational purposes.
 
-## 🙌 Acknowledgments
+##  Acknowledgments
 
 - [Django](https://www.djangoproject.com/)
 - [React](https://reactjs.org/)
